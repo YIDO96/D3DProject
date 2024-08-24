@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32002.261
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DFrameWork", "2DFrameWork\2DFrameWork.vcxproj", "{C2138BC9-A195-455F-91A6-5FF469EB5E61}"
 EndProject
@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F0
 	ProjectSection(SolutionItems) = preProject
 		Shaders\0.Cube.hlsl = Shaders\0.Cube.hlsl
 		Shaders\0.Sky.hlsl = Shaders\0.Sky.hlsl
-		Shaders\0.Sky_CR.hlsl = Shaders\0.Sky_CR.hlsl
 		Shaders\0.SkySphere.hlsl = Shaders\0.SkySphere.hlsl
 		Shaders\0.SkySphere_CR.hlsl = Shaders\0.SkySphere_CR.hlsl
+		Shaders\0.Sky_CR.hlsl = Shaders\0.Sky_CR.hlsl
 		Shaders\1.Collider.hlsl = Shaders\1.Collider.hlsl
 		Shaders\1.Cube.hlsl = Shaders\1.Cube.hlsl
 		Shaders\2.Cube.hlsl = Shaders\2.Cube.hlsl
@@ -64,7 +64,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{23927E1A-8E5E-46EE-82F6-D613BF3CD580}"
 	ProjectSection(SolutionItems) = preProject
 		Contents\Texture\cloud.png = Contents\Texture\cloud.png
-		..\..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png = ..\..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png
+		..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png = ..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png
 		Contents\Texture\Skin.png = Contents\Texture\Skin.png
 	EndProjectSection
 EndProject
@@ -98,6 +98,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameObject", "GameObject", 
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetImpoter", "AssetImpoter\AssetImpoter.vcxproj", "{408B5E5E-A44D-47B8-AC78-A324B4051C2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Emberwild", "Emberwild\Emberwild.vcxproj", "{92633342-77E4-4ECC-AD59-E80D722F8B56}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
 	EndProjectSection
@@ -150,6 +155,14 @@ Global
 		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x64.Build.0 = Release|x64
 		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x86.ActiveCfg = Release|Win32
 		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x86.Build.0 = Release|Win32
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Debug|x64.ActiveCfg = Debug|x64
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Debug|x64.Build.0 = Debug|x64
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Debug|x86.ActiveCfg = Debug|Win32
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Debug|x86.Build.0 = Debug|Win32
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Release|x64.ActiveCfg = Release|x64
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Release|x64.Build.0 = Release|x64
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Release|x86.ActiveCfg = Release|Win32
+		{92633342-77E4-4ECC-AD59-E80D722F8B56}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
