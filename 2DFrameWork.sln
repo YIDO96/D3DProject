@@ -1,0 +1,160 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2DFrameWork", "2DFrameWork\2DFrameWork.vcxproj", "{C2138BC9-A195-455F-91A6-5FF469EB5E61}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game1", "Game1\Game1.vcxproj", "{62755BC4-7433-469B-8413-314F6EC62971}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game2", "Game2\Game2.vcxproj", "{E4AABC26-46D5-436A-BE00-FF12933156D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{E3F02C0D-0DAD-4181-A968-85F48C12D251}"
+	ProjectSection(SolutionItems) = preProject
+		Shaders\0.Cube.hlsl = Shaders\0.Cube.hlsl
+		Shaders\0.Sky.hlsl = Shaders\0.Sky.hlsl
+		Shaders\0.Sky_CR.hlsl = Shaders\0.Sky_CR.hlsl
+		Shaders\0.SkySphere.hlsl = Shaders\0.SkySphere.hlsl
+		Shaders\0.SkySphere_CR.hlsl = Shaders\0.SkySphere_CR.hlsl
+		Shaders\1.Collider.hlsl = Shaders\1.Collider.hlsl
+		Shaders\1.Cube.hlsl = Shaders\1.Cube.hlsl
+		Shaders\2.Cube.hlsl = Shaders\2.Cube.hlsl
+		Shaders\2.Instance.hlsl = Shaders\2.Instance.hlsl
+		Shaders\3.Cube.hlsl = Shaders\3.Cube.hlsl
+		Shaders\4.Cube.hlsl = Shaders\4.Cube.hlsl
+		Shaders\4.Instance.hlsl = Shaders\4.Instance.hlsl
+		Shaders\4.Instance_CR.hlsl = Shaders\4.Instance_CR.hlsl
+		Shaders\4.Instance_Deferred.hlsl = Shaders\4.Instance_Deferred.hlsl
+		Shaders\4.Instance_Shadow.hlsl = Shaders\4.Instance_Shadow.hlsl
+		Shaders\4.Instance_Water.hlsl = Shaders\4.Instance_Water.hlsl
+		Shaders\4.Water.hlsl = Shaders\4.Water.hlsl
+		Shaders\5.Cube.hlsl = Shaders\5.Cube.hlsl
+		Shaders\5.Cube_CR.hlsl = Shaders\5.Cube_CR.hlsl
+		Shaders\5.Cube_Deferred.hlsl = Shaders\5.Cube_Deferred.hlsl
+		Shaders\5.Cube_Shadow.hlsl = Shaders\5.Cube_Shadow.hlsl
+		Shaders\5.Cube_Water.hlsl = Shaders\5.Cube_Water.hlsl
+		Shaders\5.MapEditor.hlsl = Shaders\5.MapEditor.hlsl
+		Shaders\6.Cube.hlsl = Shaders\6.Cube.hlsl
+		Shaders\6.DeferredRender.hlsl = Shaders\6.DeferredRender.hlsl
+		Shaders\6.PostEffect.hlsl = Shaders\6.PostEffect.hlsl
+		Shaders\6.Trail.hlsl = Shaders\6.Trail.hlsl
+		Shaders\6.UI.hlsl = Shaders\6.UI.hlsl
+		Shaders\7.Billboard.hlsl = Shaders\7.Billboard.hlsl
+		Shaders\7.Rain.hlsl = Shaders\7.Rain.hlsl
+		Shaders\8.Pop.hlsl = Shaders\8.Pop.hlsl
+		Shaders\Common.hlsl = Shaders\Common.hlsl
+		Shaders\ComputeShader.hlsl = Shaders\ComputeShader.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Txt", "Txt", "{BC1DD457-26F1-4145-994B-7D33F751C292}"
+	ProjectSection(SolutionItems) = preProject
+		Txt\랜더링파이프라인.txt = Txt\랜더링파이프라인.txt
+		Txt\벡터.txt = Txt\벡터.txt
+		Txt\삼각함수.txt = Txt\삼각함수.txt
+		Txt\좌표해상도.txt = Txt\좌표해상도.txt
+		Txt\행렬.txt = Txt\행렬.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{23927E1A-8E5E-46EE-82F6-D613BF3CD580}"
+	ProjectSection(SolutionItems) = preProject
+		Contents\Texture\cloud.png = Contents\Texture\cloud.png
+		..\..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png = ..\..\..\Downloads\JAL Guys\Contents\Texture\map1_texture12.png
+		Contents\Texture\Skin.png = Contents\Texture\Skin.png
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapTool", "MapTool\MapTool.vcxproj", "{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameObject", "GameObject", "{2C99B77E-2775-4066-AC03-9062F4F4FC4F}"
+	ProjectSection(SolutionItems) = preProject
+		Contents\Texture\bono.png = Contents\Texture\bono.png
+		Contents\Texture\bono3.png = Contents\Texture\bono3.png
+		Contents\GameObject\box.xml = Contents\GameObject\box.xml
+		Contents\GameObject\bullet.xml = Contents\GameObject\bullet.xml
+		Contents\GameObject\Cam.xml = Contents\GameObject\Cam.xml
+		Contents\GameObject\Grid.xml = Contents\GameObject\Grid.xml
+		Contents\GameObject\Map.xml = Contents\GameObject\Map.xml
+		Contents\GameObject\MapSurface.xml = Contents\GameObject\MapSurface.xml
+		Contents\GameObject\Mutant.xml = Contents\GameObject\Mutant.xml
+		Contents\GameObject\PostEffect.xml = Contents\GameObject\PostEffect.xml
+		Contents\GameObject\Robot.xml = Contents\GameObject\Robot.xml
+		Contents\GameObject\Sky1.xml = Contents\GameObject\Sky1.xml
+		Contents\GameObject\Sky2.xml = Contents\GameObject\Sky2.xml
+		Contents\GameObject\Sun.xml = Contents\GameObject\Sun.xml
+		Contents\GameObject\Target.xml = Contents\GameObject\Target.xml
+		Contents\GameObject\Terrain.xml = Contents\GameObject\Terrain.xml
+		Contents\GameObject\UI.xml = Contents\GameObject\UI.xml
+		Contents\GameObject\Vam.xml = Contents\GameObject\Vam.xml
+		Contents\GameObject\water.xml = Contents\GameObject\water.xml
+		Contents\GameObject\Zamong.xml = Contents\GameObject\Zamong.xml
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetImpoter", "AssetImpoter\AssetImpoter.vcxproj", "{408B5E5E-A44D-47B8-AC78-A324B4051C2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61} = {C2138BC9-A195-455F-91A6-5FF469EB5E61}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Debug|x64.ActiveCfg = Debug|x64
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Debug|x64.Build.0 = Debug|x64
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Debug|x86.ActiveCfg = Debug|Win32
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Debug|x86.Build.0 = Debug|Win32
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Release|x64.ActiveCfg = Release|x64
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Release|x64.Build.0 = Release|x64
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Release|x86.ActiveCfg = Release|Win32
+		{C2138BC9-A195-455F-91A6-5FF469EB5E61}.Release|x86.Build.0 = Release|Win32
+		{62755BC4-7433-469B-8413-314F6EC62971}.Debug|x64.ActiveCfg = Debug|x64
+		{62755BC4-7433-469B-8413-314F6EC62971}.Debug|x64.Build.0 = Debug|x64
+		{62755BC4-7433-469B-8413-314F6EC62971}.Debug|x86.ActiveCfg = Debug|Win32
+		{62755BC4-7433-469B-8413-314F6EC62971}.Debug|x86.Build.0 = Debug|Win32
+		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x64.ActiveCfg = Release|x64
+		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x64.Build.0 = Release|x64
+		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x86.ActiveCfg = Release|Win32
+		{62755BC4-7433-469B-8413-314F6EC62971}.Release|x86.Build.0 = Release|Win32
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x64.ActiveCfg = Debug|x64
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x64.Build.0 = Debug|x64
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x86.ActiveCfg = Debug|Win32
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Debug|x86.Build.0 = Debug|Win32
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x64.ActiveCfg = Release|x64
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x64.Build.0 = Release|x64
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x86.ActiveCfg = Release|Win32
+		{E4AABC26-46D5-436A-BE00-FF12933156D1}.Release|x86.Build.0 = Release|Win32
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x64.ActiveCfg = Debug|x64
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x64.Build.0 = Debug|x64
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x86.ActiveCfg = Debug|Win32
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Debug|x86.Build.0 = Debug|Win32
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Release|x64.ActiveCfg = Release|x64
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Release|x64.Build.0 = Release|x64
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Release|x86.ActiveCfg = Release|Win32
+		{AA547DFB-B6A2-48EE-B8B0-7B4791B28C6D}.Release|x86.Build.0 = Release|Win32
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Debug|x64.ActiveCfg = Debug|x64
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Debug|x64.Build.0 = Debug|x64
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Debug|x86.ActiveCfg = Debug|Win32
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Debug|x86.Build.0 = Debug|Win32
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x64.ActiveCfg = Release|x64
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x64.Build.0 = Release|x64
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x86.ActiveCfg = Release|Win32
+		{408B5E5E-A44D-47B8-AC78-A324B4051C2D}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E65A645-0ED0-45FC-8214-114C1DE27774}
+	EndGlobalSection
+EndGlobal

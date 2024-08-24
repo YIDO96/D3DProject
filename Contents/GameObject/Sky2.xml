@@ -1,0 +1,11 @@
+<Root Name="Sky" Visible="true" ObType="5">
+    <Mesh File="0.Cube.mesh"/>
+    <Shader File="0.Sky.hlsl"/>
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Sky file="cloud.dds"/>
+    <Children Size="0"/>
+</Root>

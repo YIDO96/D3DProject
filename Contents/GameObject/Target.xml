@@ -1,0 +1,22 @@
+<Root Name="Actor" Visible="true" ObType="1">
+    <Mesh File="1.Sphere.mesh"/>
+    <Shader File="2.Cube.hlsl"/>
+    <Material File="Sphere.mtl"/>
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="-3.7437112" Z="0"/>
+    </Transform>
+    <Children Size="1"/>
+    <Child0 Name="None2" Visible="true" ObType="0">
+        <Mesh File="2.Sphere1.mesh"/>
+        <Shader File="2.Cube.hlsl"/>
+        <Material File="Sphere.mtl"/>
+        <Transform>
+            <Position X="6.6500001" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child0>
+</Root>

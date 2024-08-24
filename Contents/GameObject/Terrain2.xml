@@ -1,0 +1,38 @@
+<Root Name="Terrain" Visible="true" ObType="3">
+    <Mesh File="Terrain2.mesh"/>
+    <Shader File="5.Cube.hlsl"/>
+    <Material File="Terrain2.mtl"/>
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Terrain garo="145" size="66049" uvScale="1"/>
+    <Children Size="2"/>
+    <Child0 Name="Block1" Visible="true" ObType="0">
+        <Collider ColliderType="1" Visible="true">
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="10" Y="10" Z="10"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Collider>
+        <Transform>
+            <Position X="-8.3000002" Y="15.25" Z="29.5"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child0>
+    <Child1 Name="Block2" Visible="true" ObType="0">
+        <Collider ColliderType="1" Visible="true">
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="10" Y="10" Z="10"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Collider>
+        <Transform>
+            <Position X="10.7" Y="15.45" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
+</Root>

@@ -1,0 +1,68 @@
+<Root Name="Bullet" Visible="true" ObType="1">
+    <Transform>
+        <Position X="-0.61377245" Y="0.040935695" Z="0"/>
+        <Scale X="5" Y="5" Z="5"/>
+        <Rotation X="0" Y="0" Z="0.052359879"/>
+    </Transform>
+    <Children Size="3"/>
+    <Child0 Name="Body" Visible="true" ObType="1">
+        <Mesh File="6.Sphere.mesh"/>
+        <Shader File="6.Cube.hlsl"/>
+        <Collider ColliderType="0" Visible="true">
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Collider>
+        <Texture File="watermelon.jpg"/>
+        <Transform>
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child0>
+    <Child1 Name="L_Body" Visible="true" ObType="1">
+        <Mesh File="6.HalfSphere.mesh"/>
+        <Shader File="6.Cube.hlsl"/>
+        <Texture File="watermelon.jpg"/>
+        <Transform>
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-1.5707964" Y="1.5707964" Z="0"/>
+        </Transform>
+        <Children Size="1"/>
+        <Child0 Name="L_Body2" Visible="true" ObType="1">
+            <Mesh File="6.HalfSphere.mesh"/>
+            <Shader File="6.Cube.hlsl"/>
+            <Texture File="watermelon.png"/>
+            <Transform>
+                <Position X="0" Y="-0.029999999" Z="0"/>
+                <Scale X="0.89999998" Y="1" Z="0.89999998"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child0>
+    </Child1>
+    <Child2 Name="R_Body" Visible="true" ObType="1">
+        <Mesh File="6.HalfSphere.mesh"/>
+        <Shader File="6.Cube.hlsl"/>
+        <Texture File="watermelon.jpg"/>
+        <Transform>
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="1.5707964" Y="1.5707964" Z="-0"/>
+        </Transform>
+        <Children Size="1"/>
+        <Child0 Name="R_Body2" Visible="true" ObType="1">
+            <Mesh File="6.HalfSphere.mesh"/>
+            <Shader File="6.Cube.hlsl"/>
+            <Texture File="watermelon.png"/>
+            <Transform>
+                <Position X="0" Y="-0.029999999" Z="0"/>
+                <Scale X="0.89999998" Y="1" Z="0.89999998"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child0>
+    </Child2>
+</Root>

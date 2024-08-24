@@ -1,0 +1,149 @@
+<Root Name="Actor" Visible="true" ObType="1">
+    <Transform>
+        <Position X="-3.2345264" Y="0" Z="3.3236015"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="-3.5766146" Z="0"/>
+    </Transform>
+    <Children Size="2"/>
+    <Child0 Name="Body" Visible="true" ObType="0">
+        <Shader File="1.Cube.hlsl"/>
+        <Collider ColliderType="0" Visible="true">
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="4.25" Y="4.25" Z="4.25"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Collider>
+        <Transform>
+            <Position X="0" Y="3.6500001" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="6"/>
+        <Child0 Name="BodyMesh" Visible="true" ObType="0">
+            <Mesh File="1.Cube1.mesh"/>
+            <Shader File="1.Cube.hlsl"/>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1.7" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child0>
+        <Child1 Name="LeftLeg" Visible="true" ObType="0">
+            <Transform>
+                <Position X="0.63157898" Y="-1.7" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="1"/>
+            <Child0 Name="Foot2" Visible="true" ObType="0">
+                <Mesh File="1.Cube1.mesh"/>
+                <Shader File="1.Cube.hlsl"/>
+                <Transform>
+                    <Position X="0" Y="-1" Z="0"/>
+                    <Scale X="0.2" Y="1" Z="0.2"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child0>
+        </Child1>
+        <Child2 Name="LeftSholder" Visible="true" ObType="0">
+            <Transform>
+                <Position X="1" Y="1.7" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="3.1764994" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="1"/>
+            <Child0 Name="LetArm" Visible="true" ObType="0">
+                <Mesh File="1.Cube1.mesh"/>
+                <Shader File="1.Cube.hlsl"/>
+                <Collider ColliderType="0" Visible="true">
+                    <Position X="0" Y="0" Z="0"/>
+                    <Scale X="1.15" Y="1.15" Z="1.15"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Collider>
+                <Transform>
+                    <Position X="0.21052639" Y="-1" Z="0"/>
+                    <Scale X="0.25" Y="1" Z="0.2"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="1"/>
+                <Child0 Name="LeftHand" Visible="true" ObType="0">
+                    <Transform>
+                        <Position X="0" Y="-1" Z="0"/>
+                        <Scale X="1" Y="1" Z="1"/>
+                        <Rotation X="0" Y="0" Z="0"/>
+                    </Transform>
+                    <Children Size="0"/>
+                </Child0>
+            </Child0>
+        </Child2>
+        <Child3 Name="Neck" Visible="true" ObType="0">
+            <Transform>
+                <Position X="0" Y="1.7" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="459.24548" Z="0"/>
+            </Transform>
+            <Children Size="1"/>
+            <Child0 Name="Head" Visible="true" ObType="0">
+                <Mesh File="1.Cube.mesh"/>
+                <Shader File="1.Cube.hlsl"/>
+                <Collider ColliderType="2" Visible="true">
+                    <Position X="0" Y="0" Z="0"/>
+                    <Scale X="1" Y="1" Z="1"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Collider>
+                <Transform>
+                    <Position X="0" Y="0.5" Z="0"/>
+                    <Scale X="0.5" Y="0.5" Z="0.5"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child0>
+        </Child3>
+        <Child4 Name="RightLeg" Visible="true" ObType="0">
+            <Transform>
+                <Position X="-0.63157898" Y="-1.7" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="1"/>
+            <Child0 Name="Foot" Visible="true" ObType="0">
+                <Mesh File="1.Cube1.mesh"/>
+                <Shader File="1.Cube.hlsl"/>
+                <Transform>
+                    <Position X="0" Y="-1" Z="0"/>
+                    <Scale X="0.2" Y="1" Z="0.2"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child0>
+        </Child4>
+        <Child5 Name="RightSholder" Visible="true" ObType="0">
+            <Transform>
+                <Position X="-1" Y="1.75" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="1"/>
+            <Child0 Name="RightArm" Visible="true" ObType="0">
+                <Mesh File="1.Cube1.mesh"/>
+                <Shader File="1.Cube.hlsl"/>
+                <Transform>
+                    <Position X="-0.21052633" Y="-1" Z="0"/>
+                    <Scale X="0.2" Y="1" Z="0.2"/>
+                    <Rotation X="0" Y="0" Z="0"/>
+                </Transform>
+                <Children Size="0"/>
+            </Child0>
+        </Child5>
+    </Child0>
+    <Child1 Name="BodyCam" Visible="true" ObType="2">
+        <Transform>
+            <Position X="0" Y="8" Z="-8"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0.2617994" Y="0" Z="0"/>
+        </Transform>
+        <Camera Ortho="false" Fov="1.047192" Width="1196" Height="835" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1196" viewportH="835"/>
+        <Children Size="0"/>
+    </Child1>
+</Root>

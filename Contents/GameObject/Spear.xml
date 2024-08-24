@@ -1,0 +1,27 @@
+<Root Name="Actor" Visible="true" ObType="1">
+    <Transform>
+        <Position X="0" Y="7.9000001" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Children Size="2"/>
+    <Child0 Name="Cam" Visible="true" ObType="2">
+        <Transform>
+            <Position X="17.007101" Y="1.8480577" Z="0.71821153"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0.056999963" Y="-1.6119968" Z="0"/>
+        </Transform>
+        <Camera Ortho="false" Fov="1.047192" Width="1196" Height="835" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1196" viewportH="835"/>
+        <Children Size="0"/>
+    </Child0>
+    <Child1 Name="mesh" Visible="true" ObType="0">
+        <Mesh File="1.Sphere.mesh"/>
+        <Shader File="1.Cube.hlsl"/>
+        <Transform>
+            <Position X="0" Y="0" Z="0.89999998"/>
+            <Scale X="0.1" Y="0.1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
+</Root>

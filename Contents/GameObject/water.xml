@@ -1,0 +1,12 @@
+<Root Name="Water" Visible="true" ObType="10">
+    <Mesh File="4.Plane.mesh"/>
+    <Shader File="4.Water.hlsl"/>
+    <Material File="Water.mtl"/>
+    <Transform>
+        <Position X="0" Y="9.4499998" Z="0"/>
+        <Scale X="200" Y="1" Z="300"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Water uvScale="40.217999" velocityX="0.75800002" velocityY="-0.303"/>
+    <Children Size="0"/>
+</Root>

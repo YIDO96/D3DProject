@@ -1,0 +1,12 @@
+<Root Name="Pop" Visible="true" ObType="9">
+    <Mesh File="8.Billboard.mesh"/>
+    <Shader File="8.Pop.hlsl"/>
+    <Material File="effect.mtl"/>
+    <Transform>
+        <Position X="-17.549999" Y="19.450001" Z="0"/>
+        <Scale X="1.943" Y="3.8169999" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Pop particleScaleX="0" particleScaleY="0" particleCount="100" velocityScalar="149.326" duration="47.978001" gravity="3.3710001"/>
+    <Children Size="0"/>
+</Root>

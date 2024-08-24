@@ -1,0 +1,39 @@
+<Root Name="Actor" Visible="true" ObType="1">
+    <Transform>
+        <Position X="-49.942131" Y="6.988472" Z="49.788502"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Children Size="2"/>
+    <Child0 Name="Body" Visible="true" ObType="0">
+        <Mesh File="rizamong/0b2.mesh"/>
+        <Shader File="3.Cube.hlsl"/>
+        <Material File="charizard-pokemon-go/mat_0.mtl"/>
+        <Transform>
+            <Position X="0" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="1"/>
+        <Child0 Name="ob1" Visible="true" ObType="0">
+            <Mesh File="rizamong/ob1.mesh"/>
+            <Shader File="3.Cube.hlsl"/>
+            <Material File="charizard-pokemon-go/mat_1.mtl"/>
+            <Transform>
+                <Position X="0" Y="0" Z="0"/>
+                <Scale X="1" Y="1" Z="1"/>
+                <Rotation X="0" Y="0" Z="0"/>
+            </Transform>
+            <Children Size="0"/>
+        </Child0>
+    </Child0>
+    <Child1 Name="Cam" Visible="true" ObType="2">
+        <Transform>
+            <Position X="0" Y="90.918999" Z="-90"/>
+            <Scale X="1.25" Y="1" Z="1"/>
+            <Rotation X="0.78539395" Y="0" Z="0"/>
+        </Transform>
+        <Camera Ortho="false" Fov="1.047192" Width="1441" Height="883" NearZ="0.1" FarZ="500" viewportX="0" viewportY="0" viewportW="1441" viewportH="883"/>
+        <Children Size="0"/>
+    </Child1>
+</Root>

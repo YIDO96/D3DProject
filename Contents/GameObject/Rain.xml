@@ -1,0 +1,12 @@
+<Root Name="Rain" Visible="true" ObType="8">
+    <Mesh File="7.Billboard.mesh"/>
+    <Shader File="7.Rain.hlsl"/>
+    <Material File="effect2.mtl"/>
+    <Transform>
+        <Position X="0" Y="23.299999" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Rain particleScaleX="0" particleScaleY="0" particleCount="100" rangeX="51.852001" rangeY="103.704" rangeZ="69.260002" velocityX="0" velocityY="-2" velocityZ="0" duration="21.91"/>
+    <Children Size="0"/>
+</Root>
