@@ -1,10 +1,12 @@
-﻿#pragma once
+#pragma once
 class Main : public Scene
 {
 
 private:
 	Camera* cam1;
 	Grid* grid;
+
+
 
 public:
 	Main();

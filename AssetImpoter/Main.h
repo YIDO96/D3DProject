@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Main : public Scene
 {
@@ -10,16 +10,16 @@ private:
 	Actor*				temp;
 	string				Modelfile;
 	string				Animfile;
-	//ÀÓÆ÷Æ®ÇØ¼­ °¡Á®¿Â µ¥ÀÌÅÍ
+	//ì„í¬íŠ¸í•´ì„œ ê°€ì ¸ì˜¨ ë°ì´í„°
 	const aiScene*		scene;
 	Assimp::Importer	importer;
 public:
 	Main();
 	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //ÇØÁ¦
+	virtual void Release() override; //í•´ì œ
 	virtual void Update() override;
-	virtual void LateUpdate() override;//°»½Å
+	virtual void LateUpdate() override;//ê°±ì‹ 
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
@@ -112,7 +112,7 @@ struct AnimRotation
 struct AnimNode
 {
 	string					name;
-	//°¢ º¤ÅÍ »çÀÌÁî°¡ ´Ù¸¦¼öÀÖ´Ù.
+	//ê° ë²¡í„° ì‚¬ì´ì¦ˆê°€ ë‹¤ë¥¼ìˆ˜ìˆë‹¤.
 	vector<AnimPosition>	position;
 	vector<AnimScale>		scale;
 	vector<AnimRotation>	rotation;

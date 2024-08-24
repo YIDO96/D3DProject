@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Main.h"
 
 Main::Main()
@@ -60,18 +60,18 @@ void Main::Update()
         );
         assert(scene != NULL and "Import Error");
 
-        //¸Ş½¬¸¸ ÀĞ¾î¿Í¼­ ¾×ÅÍ±¸¼º
+        //ë©”ì‰¬ë§Œ ì½ì–´ì™€ì„œ ì•¡í„°êµ¬ì„±
 
         temp = Actor::Create("Root");
 
-        //¸ÓÅÍ¸®¾ó ÀĞ±â
+        //ë¨¸í„°ë¦¬ì–¼ ì½ê¸°
         ReadMaterial();
 
         temp->AddChild(GameObject::Create(scene->mRootNode->mName.C_Str()));
-        //³ëµå ÀĞ±â
+        //ë…¸ë“œ ì½ê¸°
         ReadNode(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
 
-        //¸Ş½¬ µ¥ÀÌÅÍÀĞ±â
+        //ë©”ì‰¬ ë°ì´í„°ì½ê¸°
         ReadMesh(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
         importer.FreeScene();
     }
@@ -94,7 +94,7 @@ void Main::Update()
         );
         assert(scene != NULL and "Import Error");
 
-        //¸Ş½¬¸¸ ÀĞ¾î¿Í¼­ ¾×ÅÍ±¸¼º
+        //ë©”ì‰¬ë§Œ ì½ì–´ì™€ì„œ ì•¡í„°êµ¬ì„±
 
         temp = Actor::Create("Root");
         temp->skeleton = new Skeleton();
@@ -102,11 +102,11 @@ void Main::Update()
 
       
 
-        ////¸ÓÅÍ¸®¾ó ÀĞ±â
+        ////ë¨¸í„°ë¦¬ì–¼ ì½ê¸°
         ReadMaterial();
 
         temp->AddBone(GameObject::Create(scene->mRootNode->mName.C_Str()));
-        //³ëµå ÀĞ±â
+        //ë…¸ë“œ ì½ê¸°
         ReadBoneNode(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
         {
             int tok = Modelfile.find_last_of(".");
@@ -127,7 +127,7 @@ void Main::Update()
         {
             it->second->skelRoot = temp;
         }
-        ////¸Ş½¬ µ¥ÀÌÅÍÀĞ±â
+        ////ë©”ì‰¬ ë°ì´í„°ì½ê¸°
         ReadSkinMesh(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
         
         importer.FreeScene();
@@ -154,7 +154,7 @@ void Main::Update()
         {
             temp->anim = new Animations();
         }
-        //¾Ö´Ï¸ŞÀÌ¼Ç °¹¼ö
+        //ì• ë‹ˆë©”ì´ì…˜ ê°¯ìˆ˜
         for (UINT i = 0; i < scene->mNumAnimations; i++)
         {
             shared_ptr<Animation> Anim = make_shared<Animation>();
@@ -164,7 +164,7 @@ void Main::Update()
 
             size_t tok2 = Animfile.find_last_of(".");
             Anim->file = Animfile.substr(0, tok2) + to_string(i);
-            //  0, ¸¶Áö¸·ÇÁ·¹ÀÓ±îÁö Á¸Àç
+            //  0, ë§ˆì§€ë§‰í”„ë ˆì„ê¹Œì§€ ì¡´ì¬
             Anim->frameMax = (int)srcAnim->mDuration + 1;
             Anim->tickPerSecond = srcAnim->mTicksPerSecond != 0.0 ? (float)srcAnim->mTicksPerSecond : 25.0f;
             Anim->boneMax = temp->boneIndexCount;
@@ -177,7 +177,7 @@ void Main::Update()
 
 
 
-            //Ã¤³Î°¹¼ö -> º»¿¡ ´ëÀÀ
+            //ì±„ë„ê°¯ìˆ˜ -> ë³¸ì— ëŒ€ì‘
             for (UINT j = 0; j < srcAnim->mNumChannels; j++)
             {
                 AnimNode* animNode = new AnimNode();
@@ -235,13 +235,13 @@ void Main::Update()
                         Anim->arrFrameBone[k][chanel->boneIndex] = chanel->GetLocal().Invert() * W;
                     }
                 }
-                //¿©±â¼­ Ã¤³Î³¡(º»)
+                //ì—¬ê¸°ì„œ ì±„ë„ë(ë³¸)
 
             }
-            //¿©±â¼­ ¾Ö´Ô³¡
+            //ì—¬ê¸°ì„œ ì• ë‹˜ë
             temp->anim->playList.push_back(Anim);
 
-            //¹æ±İ Ãß°¡ÇÑ ¾Ö´Ï¸ŞÀÌ¼Ç ÆÄÀÏ·Î ÀúÀå
+            //ë°©ê¸ˆ ì¶”ê°€í•œ ì• ë‹ˆë©”ì´ì…˜ íŒŒì¼ë¡œ ì €ì¥
             {
                 size_t tok = Modelfile.find_last_of(".");
                 string checkPath = "../Contents/Animation/" + Modelfile.substr(0, tok);
@@ -308,7 +308,7 @@ void Main::ReadMaterial()
         aiMaterial* srcMtl = scene->mMaterials[i];
         
         Material* destMtl = new Material();
-        //ÀÌ¸§ -Å°°ª
+        //ì´ë¦„ -í‚¤ê°’
         destMtl->file = srcMtl->GetName().C_Str();
 
         aiColor3D ambient;
@@ -355,7 +355,7 @@ void Main::ReadMaterial()
 
 
 
-            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
             if (texFound == AI_SUCCESS && Modelfile != "")
             {
                 destMtl->ambient.w = 1.0f;
@@ -387,7 +387,7 @@ void Main::ReadMaterial()
             size_t index = TextureFile.find_last_of('/');
             TextureFile = TextureFile.substr(index + 1, TextureFile.length());
 
-            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
             if (texFound == AI_SUCCESS && Modelfile != "")
             {
                 destMtl->diffuse.w = 1.0f;
@@ -419,7 +419,7 @@ void Main::ReadMaterial()
             size_t index = TextureFile.find_last_of('/');
             TextureFile = TextureFile.substr(index + 1, TextureFile.length());
 
-            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
             if (texFound == AI_SUCCESS && Modelfile != "")
             {
                 destMtl->specular.w = 1.0f;
@@ -451,7 +451,7 @@ void Main::ReadMaterial()
             size_t index = TextureFile.find_last_of('/');
             TextureFile = TextureFile.substr(index + 1, TextureFile.length());
 
-            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
             if (texFound == AI_SUCCESS && Modelfile != "")
             {
                 destMtl->emissive.w = 1.0f;
@@ -508,7 +508,7 @@ void Main::ReadNode(GameObject* dest, aiNode* src)
         GameObject* child =
             GameObject::Create(src->mChildren[i]->mName.C_Str());
 
-        //ÀÓ½Ã
+        //ì„ì‹œ
         child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
 
         dest->AddChild(child);
@@ -534,7 +534,7 @@ void Main::ReadBoneNode(GameObject* dest, aiNode* src)
         GameObject* child =
             GameObject::Create(src->mChildren[i]->mName.C_Str());
 
-        //ÀÓ½Ã
+        //ì„ì‹œ
         child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
 
         dest->AddBone(child);
@@ -544,10 +544,10 @@ void Main::ReadBoneNode(GameObject* dest, aiNode* src)
 
 }
 
-//³ë¸Ö,ÅØ½ºÃÄÁÂÇ¥
+//ë…¸ë©€,í…ìŠ¤ì³ì¢Œí‘œ
 void Main::ReadMesh(GameObject* dest, aiNode* src)
 {
-    //³ëµå°¡ °¡Áö°íÀÖ´Â ¸Ş½¬ ¼ö ¸¸Å­
+    //ë…¸ë“œê°€ ê°€ì§€ê³ ìˆëŠ” ë©”ì‰¬ ìˆ˜ ë§Œí¼
     for (UINT i = 0; i < src->mNumMeshes; i++)
     {
         UINT index = src->mMeshes[i];
@@ -563,10 +563,10 @@ void Main::ReadMesh(GameObject* dest, aiNode* src)
         mtlFile = filePath + mtlFile + ".mtl";
         string meshFile = src->mName.C_Str();
 
-        //Á¤Á¡ °¹¼ö¸¸Å­ ´Ã¸®±â
+        //ì •ì  ê°¯ìˆ˜ë§Œí¼ ëŠ˜ë¦¬ê¸°
         VertexList->resize(srcMesh->mNumVertices);
 
-        //Á¤Á¡°¹¼ö¸¸Å­ ¹İº¹
+        //ì •ì ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µ
         for (UINT j = 0; j < VertexList->size(); j++)
         {
             (*VertexList)[j].position.x = srcMesh->mVertices[j].x;
@@ -651,7 +651,7 @@ void Main::ReadMesh(GameObject* dest, aiNode* src)
 
 void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
 {
-    //³ëµå°¡ °¡Áö°íÀÖ´Â ¸Ş½¬ ¼ö ¸¸Å­
+    //ë…¸ë“œê°€ ê°€ì§€ê³ ìˆëŠ” ë©”ì‰¬ ìˆ˜ ë§Œí¼
     for (UINT i = 0; i < src->mNumMeshes; i++)
     {
         UINT index = src->mMeshes[i];
@@ -668,13 +668,13 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
         mtlFile = filePath + mtlFile + ".mtl";
         string meshFile = src->mName.C_Str();
 
-        //Á¤Á¡ °¹¼ö¸¸Å­ ´Ã¸®±â
+        //ì •ì  ê°¯ìˆ˜ë§Œí¼ ëŠ˜ë¦¬ê¸°
         VertexList->resize(srcMesh->mNumVertices);
         VertexWeights.resize(srcMesh->mNumVertices);
 
         ReadBoneData(srcMesh, VertexWeights);
 
-        //Á¤Á¡°¹¼ö¸¸Å­ ¹İº¹
+        //ì •ì ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µ
         for (UINT j = 0; j < VertexList->size(); j++)
         {
             (*VertexList)[j].position.x = srcMesh->mVertices[j].x;
@@ -692,7 +692,7 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
             (*VertexList)[j].uv.x = srcMesh->mTextureCoords[0][j].x;
             (*VertexList)[j].uv.y = srcMesh->mTextureCoords[0][j].y;
 
-            //º»µ¥ÀÌÅÍ°¡ ÀÖÀ»¶§
+            //ë³¸ë°ì´í„°ê°€ ìˆì„ë•Œ
             if (!VertexWeights.empty())
             {
                 VertexWeights[j].Normalize();
@@ -775,10 +775,10 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
 
 void Main::ReadBoneData(aiMesh* mesh, vector<class VertexWeights>& vertexWeights)
 {
-    //¸Ş½¬°¡ °¡Áö°í ÀÖ´Â º» °³¼ö ¸¸Å­
+    //ë©”ì‰¬ê°€ ê°€ì§€ê³  ìˆëŠ” ë³¸ ê°œìˆ˜ ë§Œí¼
     for (UINT i = 0; i < mesh->mNumBones; i++)
     {
-        //ÇöÀçº»ÀÌ ÇÏÀÌ¾î¶óÀÌÅ°¿¡¼­ ¸î¹øÂ° ÀÎµ¦½ºÀÎ°¡?
+        //í˜„ì¬ë³¸ì´ í•˜ì´ì–´ë¼ì´í‚¤ì—ì„œ ëª‡ë²ˆì§¸ ì¸ë±ìŠ¤ì¸ê°€?
         string boneName = mesh->mBones[i]->mName.C_Str();
         int boneIndex = temp->Find(boneName)->boneIndex;
         for (UINT j = 0; j < mesh->mBones[i]->mNumWeights; j++)
@@ -812,34 +812,34 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, in
 
 Vector3 Interpolated::CalcInterpolatedScaling(AnimNode* iter, float time, int Duration)
 {
-    //ºñ¾îÀÖÀ¸¸é 1,1,1¹İÈ¯
+    //ë¹„ì–´ìˆìœ¼ë©´ 1,1,1ë°˜í™˜
     if (iter->scale.empty())
         return Vector3(1.0f, 1.0f, 1.0f);
-    //ÇÑ°³¸¸ ÀÖ´Â³ğÀº Ã¹¹øÂ° °ª ¹İÈ¯
+    //í•œê°œë§Œ ìˆëŠ”ë†ˆì€ ì²«ë²ˆì§¸ ê°’ ë°˜í™˜
     if (iter->scale.size() == 1)
         return iter->scale.front().scale;
-    //¸¶Áö¸· ³ğÀº ¸¶Áö¸·°ª ¹İÈ¯
+    //ë§ˆì§€ë§‰ ë†ˆì€ ë§ˆì§€ë§‰ê°’ ë°˜í™˜
     if (time == Duration - 1)
     {
         return iter->scale.back().scale;
     }
-    //º¸°£ ½ÃÀÛ
+    //ë³´ê°„ ì‹œì‘
     int scaling_index = FindScale(iter, time);
-    //-1 ÀÎµ¦½º°¡ ¾øÀ¸¹Ç·Î ¸¶Áö¸· °ªÀ¸·Î ¹İÈ¯
+    //-1 ì¸ë±ìŠ¤ê°€ ì—†ìœ¼ë¯€ë¡œ ë§ˆì§€ë§‰ ê°’ìœ¼ë¡œ ë°˜í™˜
     if (scaling_index == -1)
     {
         return iter->scale.back().scale;
     }
-    //º¸°£ ³¡
+    //ë³´ê°„ ë
     UINT next_scaling_index = scaling_index + 1;
     assert(next_scaling_index < iter->scale.size());
 
-    //Â÷ÀÌ ³ª´Â ½Ã°£°ª
+    //ì°¨ì´ ë‚˜ëŠ” ì‹œê°„ê°’
     float delta_time = (float)(iter->scale[next_scaling_index].time
         - iter->scale[scaling_index].time);
-    //º¸°£°ª
+    //ë³´ê°„ê°’
     float factor = (time - (float)(iter->scale[scaling_index].time)) / delta_time;
-    //¾êµµ ÇÏ³ª¸¸ ÀÖ´Â¾Ö
+    //ì–˜ë„ í•˜ë‚˜ë§Œ ìˆëŠ”ì• 
     if (factor < 0.0f)
     {
         return iter->scale.front().scale;
@@ -933,7 +933,7 @@ int Interpolated::FindScale(AnimNode* iter, float time)
     //vector<AnimScale> scale_frames = iter->second->scale;
 
     if (iter->scale.empty())
-        return -1;//-1 À» ¹İÈ¯ÇÏ¸é ¿À·ù·Î ÅÍÁö°Ô µÊ
+        return -1;//-1 ì„ ë°˜í™˜í•˜ë©´ ì˜¤ë¥˜ë¡œ í„°ì§€ê²Œ ë¨
 
     for (UINT i = 0; i < iter->scale.size() - 1; i++)
     {
@@ -941,7 +941,7 @@ int Interpolated::FindScale(AnimNode* iter, float time)
             return i;
     }
 
-    return -1;//-1 À» ¹İÈ¯ÇÏ¸é ¿À·ù·Î ÅÍÁö°Ô µÊ
+    return -1;//-1 ì„ ë°˜í™˜í•˜ë©´ ì˜¤ë¥˜ë¡œ í„°ì§€ê²Œ ë¨
 }
 int Interpolated::FindRot(AnimNode* iter, float time)
 {
