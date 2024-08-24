@@ -1,11 +1,11 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Main.h"
 
 Main::Main()
 {
 
 	//
-	//Åõ¸í ÀÌ¹ÌÁöÃâ·Â °æÈ£Çü123123
+	//íˆ¬ëª… ì´ë¯¸ì§€ì¶œë ¥ ê²½í˜¸í˜•123123
 }
 
 Main::~Main()
