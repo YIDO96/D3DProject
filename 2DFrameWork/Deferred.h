@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 class Deferred
 {
 
@@ -21,7 +21,7 @@ public:
     ~Deferred();
     void SetTarget(Color clear = Color(0, 0, 0, 0));
     void SetRGBTexture(int slot);
-    //√¢ªÁ¿Ã¡Ó ¡∂¿˝
+    //Ï∞ΩÏÇ¨Ïù¥Ï¶à Ï°∞Ï†à
     void ResizeScreen(float width, float height);
     void RenderDetail();
     void Render();

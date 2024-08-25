@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 #include <queue>
 
 SlashTrail::SlashTrail()
@@ -36,7 +36,7 @@ void SlashTrail::Play()
 void SlashTrail::Stop()
 {
     isPlaying = false;
-    //»ı¼ºÇß´ø Æ®·¹ÀÏÀº »èÁ¦
+    //ìƒì„±í–ˆë˜ íŠ¸ë ˆì¼ì€ ì‚­ì œ
     vertices.clear();
     SafeRelease(vertexBuffer);
 }
@@ -57,7 +57,7 @@ void SlashTrail::Update()
             vertices.push_back(VertexPT(Bottom->GetWorldPos(), Vector2(0, 0)));
             vertices.push_back(VertexPT(Top->GetWorldPos(), Vector2(0, 0)));
 
-            //³»°¡ ÃÖ´ë »ç°¢Çü °¹¼ö¸¦ ³Ñ¾úÀ»¶§
+            //ë‚´ê°€ ìµœëŒ€ ì‚¬ê°í˜• ê°¯ìˆ˜ë¥¼ ë„˜ì—ˆì„ë•Œ
 
             if (vertices.size() > maxTrail * 6)
             {
@@ -69,7 +69,7 @@ void SlashTrail::Update()
                 vertices.erase(vertices.begin());
             }
 
-            //»ç°¢Çü °¹¼ö¸¸Å­ ¹İº¹
+            //ì‚¬ê°í˜• ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µ
             int count = vertices.size() / 6;
 
             for (int i = 0; i < count; i++)

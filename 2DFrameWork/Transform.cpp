@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 bool Transform::worldPos = false;
 ID3D11Buffer* Transform::WBuffer = nullptr;
@@ -7,7 +7,7 @@ void Transform::CreateStaticMember()
 	D3D11_BUFFER_DESC desc = { 0 };
 	desc.ByteWidth = sizeof(Matrix);
 	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	desc.MiscFlags = 0;
 	desc.StructureByteStride = 0;
@@ -74,7 +74,7 @@ void Transform::UpdateAnim(Matrix&& bone)
 	R = Matrix::CreateFromYawPitchRoll(rotation.y, rotation.x, rotation.z);
 	T = Matrix::CreateTranslation(position);
 
-	//    ¿©±ä °¡¸¸È÷ * ¿òÁ÷ÀÓ
+	//    ì—¬ê¸´ ê°€ë§Œíˆ * ì›€ì§ì„
 	RT = R * T * bone;
 	W = S * RT;
 	if (parent)

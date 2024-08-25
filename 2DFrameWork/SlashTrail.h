@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 class SlashTrail
 {
     shared_ptr<Shader>      shader;
  
 
-    //mesh ¸â¹ö
+    //mesh ë©¤ë²„
     vector<VertexPT>        vertices;
     ID3D11Buffer*           vertexBuffer;
     D3D_PRIMITIVE_TOPOLOGY  primitiveTopology;
@@ -18,16 +18,16 @@ public:
     shared_ptr<Material>    material;
     GameObject* Top = nullptr;
     GameObject* Bottom = nullptr;
-    float       interval;       //»ı¼º °£°İ
-    int         maxTrail;       //»ç°¢Çü °¹¼ö
+    float       interval;       //ìƒì„± ê°„ê²©
+    int         maxTrail;       //ì‚¬ê°í˜• ê°¯ìˆ˜
     bool        isPlaying;
 
     SlashTrail();
     ~SlashTrail();
     void Play();
     void Stop();
-    void Update(); //ÀÜ»ó¸Ş½Ã °»½Å
-    void Render(); //ÀÜ»ó¸Ş½Ã ·»´õ
+    void Update(); //ì”ìƒë©”ì‹œ ê°±ì‹ 
+    void Render(); //ì”ìƒë©”ì‹œ ë Œë”
     void RenderDetail();
 };
 

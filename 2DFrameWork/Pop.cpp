@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 ID3D11Buffer* Pop::PopBuffer = nullptr;
 void Pop::CreateStaticMember()
 {
@@ -6,7 +6,7 @@ void Pop::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(POP_DESC);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -35,7 +35,7 @@ Pop* Pop::Create(string name)
 void Pop::Render()
 {
 	desc.duration = duration;
-	//Àç»ıÀ» ½ÃÀÛÇÑ ½Ã°£
+	//ì¬ìƒì„ ì‹œì‘í•œ ì‹œê°„
 	desc.time = playTime;
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -69,8 +69,8 @@ void Pop::Reset()
 
 	for (UINT i = 0; i < particleCount; i++)
 	{
-		//ÀÌ¹ÌÁö Å©±â °¡·Î¼¼·Î¸¦ ·£´ı°ª
-		//4~8 »çÀÌ°ª
+		//ì´ë¯¸ì§€ í¬ê¸° ê°€ë¡œì„¸ë¡œë¥¼ ëœë¤ê°’
+		//4~8 ì‚¬ì´ê°’
 		scale.x = RANDOM->Float(-particleScale.x, particleScale.x);
 		scale.y = RANDOM->Float(-particleScale.y, particleScale.y);
 		scale.x = S._11 + scale.x;
@@ -81,22 +81,22 @@ void Pop::Reset()
 		Vector3 position = Vector3(0, 0, 0);
 
 
-		//¹æÇâº¤ÅÍ Right
+		//ë°©í–¥ë²¡í„° Right
 		Vector3 velocity = Vector3(1, 0, 0);
 
-		//ÀÓÀÇÀÇ È¸ÀüµÈ 3°³Ãà
+		//ì„ì˜ì˜ íšŒì „ëœ 3ê°œì¶•
 		Vector3 rot;
 		rot.y = RANDOM->Float(0.0f, PI * 2.0f);
 		rot.x = RANDOM->Float(0.0f, PI * 2.0f);
 		rot.z = RANDOM->Float(0.0f, PI * 2.0f);
 
-		//ÀÓÀÇÀÇ È¸ÀüÇà·Ä
+		//ì„ì˜ì˜ íšŒì „í–‰ë ¬
 		Matrix matRot = Matrix::CreateFromYawPitchRoll(rot.y, rot.x, rot.z);
 		// v = v * R
 		velocity = Vector3::TransformNormal(velocity, matRot);
 		velocity *= velocityScalar;
 
-		//³»°¡ ¹æÇâº¤ÅÍ¸¦ 3°³ÃàÀ» ·£´ı°ªÀ¸·Î È¸Àü½ÃÄÑ Àâ´Â´Ù.
+		//ë‚´ê°€ ë°©í–¥ë²¡í„°ë¥¼ 3ê°œì¶•ì„ ëœë¤ê°’ìœ¼ë¡œ íšŒì „ì‹œì¼œ ì¡ëŠ”ë‹¤.
 		((VertexPSV*)mesh->vertices)[i].velocity = velocity;
 		((VertexPSV*)mesh->vertices)[i].position = position;
 		((VertexPSV*)mesh->vertices)[i].size = scale;

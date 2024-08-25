@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 
 void Direct3D11::Create()
 {
@@ -43,11 +43,11 @@ void Direct3D11::Create()
 			DXGI_MODE_DESC* displayModes = nullptr;
 			DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
-			hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &num_modes, nullptr); // ¸ðµå °³¼ö °¡Á®¿À±â
+			hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &num_modes, nullptr); // ëª¨ë“œ ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°
 			Check(hr);
 
 			displayModes = new DXGI_MODE_DESC[num_modes];
-			hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &num_modes, displayModes); // µð½ºÇÃ·¹ÀÌ ¸ðµå °¡Á®¿À±â
+			hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &num_modes, displayModes); // ë””ìŠ¤í”Œë ˆì´ ëª¨ë“œ ê°€ì ¸ì˜¤ê¸°
 			Check(hr);
 
 
@@ -201,7 +201,7 @@ void Direct3D11::Clear(Color color, ID3D11RenderTargetView* rtv, ID3D11DepthSten
 
 void Direct3D11::Present()
 {
-	//¼öÁ÷µ¿±âÈ­¸¦ °áÁ¤
+	//ìˆ˜ì§ë™ê¸°í™”ë¥¼ ê²°ì •
 	swapChain->Present(App.vSync == true ? 1 : 0, 0);
 }
 
@@ -238,7 +238,7 @@ void Direct3D11::CreateBackBuffer(float width, float height)
 			SafeRelease(backbufferPointer);
 	}
 
-	//Create Texture - DSV¿ë
+	//Create Texture - DSVìš©
 	{
 		D3D11_TEXTURE2D_DESC desc = { 0 };
 		desc.Width = (UINT)width;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 class Input : public Singleton<Input>
@@ -13,7 +13,7 @@ private:
     Vector3         oldPostion;
     Vector3         currentPostion;
 
-    //ÀÍ¸í enum
+    //ìµëª… enum
     enum
     {
         KEY_INPUT_STATUS_DOWN,
@@ -22,16 +22,16 @@ private:
         KEY_INPUT_STATUS_UP,
     };
 public:
-    Vector3 position;       //¸¶¿ì½º À§Ä¡
-    Vector3 movePosition;   //¸¶¿ì½º ÀÌµ¿º¤ÅÍ
+    Vector3 position;       //ë§ˆìš°ìŠ¤ ìœ„ì¹˜
+    Vector3 movePosition;   //ë§ˆìš°ìŠ¤ ì´ë™ë²¡í„°
     Vector3 wheelMoveValue;
 public:
     Input();
     ~Input();
 
-    bool KeyDown(int KeyCode); //´­·¶À»¶§ ÃÖÃÊ1È¸
-    bool KeyPress(int KeyCode);//´©¸£°íÀÖÀ»¶§
-    bool KeyUp(int KeyCode); //´­·¶´Ù°¡ ¶¼¾úÀ»¶§ ÃÖÃÊ1È¸
+    bool KeyDown(int KeyCode); //ëˆŒë €ì„ë•Œ ìµœì´ˆ1íšŒ
+    bool KeyPress(int KeyCode);//ëˆ„ë¥´ê³ ìˆì„ë•Œ
+    bool KeyUp(int KeyCode); //ëˆŒë €ë‹¤ê°€ ë–¼ì—ˆì„ë•Œ ìµœì´ˆ1íšŒ
 
     LRESULT InputProc(UINT message, WPARAM wParam, LPARAM lParam);
     void Update();

@@ -1,4 +1,4 @@
-
+ï»¿
 #include "Framework.h"
 
 Dwrite::Dwrite()
@@ -55,7 +55,7 @@ Dwrite::Dwrite()
 
 Dwrite::~Dwrite()
 {
-    //º¤ÅÍ »çÀÌÁî ¸¸Å­ »èÁ¦
+    //ë²¡í„° ì‚¬ì´ì¦ˆ ë§Œí¼ ì‚­ì œ
     for (FontBrushDesc desc : fontBrush)
         SafeRelease(desc.brush);
 
@@ -110,30 +110,30 @@ void Dwrite::RenderText(wstring text, RECT rect, float size, wstring font, Color
     brushDesc.color = color;
 
     FontBrushDesc* findBrush = NULL;
-    //¹İº¹¹®  fontBrush º¤ÅÍÀÇ »çÀÌÁî¸¸Å­ ¹İº¹
-    //¹İº¹ÀÚ desc
+    //ë°˜ë³µë¬¸  fontBrush ë²¡í„°ì˜ ì‚¬ì´ì¦ˆë§Œí¼ ë°˜ë³µ
+    //ë°˜ë³µì desc
     
     for (FontBrushDesc& desc : fontBrush)
     {
-        //¿¬»êÀÚ ÀçÁ¤ÀÇ ==  È£Ãâ
+        //ì—°ì‚°ì ì¬ì •ì˜ ==  í˜¸ì¶œ
         if (desc == brushDesc)
         {
             findBrush = &desc;
             break;
         }
     }
-    //º¤ÅÍ¾È¿¡ ÇØ´ç ºê·¯½Ã°¡ ¾ø´Ù¸é
+    //ë²¡í„°ì•ˆì— í•´ë‹¹ ë¸ŒëŸ¬ì‹œê°€ ì—†ë‹¤ë©´
     if (findBrush == NULL)
     {
         D2D1::ColorF colorF = D2D1::ColorF(color.x, color.y, color.z);
         deviceContext->CreateSolidColorBrush(colorF, &brushDesc.brush);
 
-        //ÇØ´ç ºê·¯½Ã¸¦ º¤ÅÍ¿¡ Ãß°¡(±âÁ¸¿¡ Á¸ÀçÇÏÁö ¾Ê±â¶§¹®¿¡)
+        //í•´ë‹¹ ë¸ŒëŸ¬ì‹œë¥¼ ë²¡í„°ì— ì¶”ê°€(ê¸°ì¡´ì— ì¡´ì¬í•˜ì§€ ì•Šê¸°ë•Œë¬¸ì—)
         fontBrush.push_back(brushDesc);
         findBrush = &brushDesc;
     }
 
-    //¸Å°³º¯¼ö ÆùÆ®°ª Á¤ÀÇ
+    //ë§¤ê°œë³€ìˆ˜ í°íŠ¸ê°’ ì •ì˜
     FontTextDesc textDesc;
     textDesc.font = font;
     textDesc.fontSize = size;
@@ -142,12 +142,12 @@ void Dwrite::RenderText(wstring text, RECT rect, float size, wstring font, Color
     textDesc.weight = weight;
 
     FontTextDesc* findText = NULL;
-    //º¤ÅÍÀÇ »çÀÌÁî¸¸Å­ ¹İº¹
+    //ë²¡í„°ì˜ ì‚¬ì´ì¦ˆë§Œí¼ ë°˜ë³µ
 
     //for (FontTextDesc& desc : fontText)
     for (UINT i = 0; i < fontText.size(); i++)
     {
-        //¸¸¾à ±âÁ¸ ÅØ½ºÆ®°¡ Á¸Àç ÇÒ¶§
+        //ë§Œì•½ ê¸°ì¡´ í…ìŠ¤íŠ¸ê°€ ì¡´ì¬ í• ë•Œ
         //if (desc == textDesc)
         if (fontText[i] == textDesc)
         {
@@ -156,7 +156,7 @@ void Dwrite::RenderText(wstring text, RECT rect, float size, wstring font, Color
             break;
         }
     }
-    //¾ø´Ù¸é Ãß°¡
+    //ì—†ë‹¤ë©´ ì¶”ê°€
     if (findText == NULL)
     {
         writeFactory->CreateTextFormat

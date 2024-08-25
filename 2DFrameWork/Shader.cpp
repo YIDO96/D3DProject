@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 
 Shader::Shader() :
     vertexLayout(nullptr), vertexShader(nullptr)
@@ -18,7 +18,7 @@ Shader::~Shader()
 void Shader::LoadFile(string file)
 {
     this->file = file;
-    //ÄÄÆÄÀÏ°á°ú¸¦ ´ã¾Æ³õ´Â ÀÎÅÍÆäÀÌ½º
+    //ì»´íŒŒì¼ê²°ê³¼ë¥¼ ë‹´ì•„ë†“ëŠ” ì¸í„°íŽ˜ì´ìŠ¤
     ID3D10Blob* VsBlob;
     ID3D10Blob* PsBlob;
 

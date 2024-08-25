@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 ID3D11Buffer* Camera::VBuffer = nullptr;
 ID3D11Buffer* Camera::PBuffer = nullptr;
@@ -14,7 +14,7 @@ void Camera::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(Matrix);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -26,7 +26,7 @@ void Camera::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(Matrix);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -39,7 +39,7 @@ void Camera::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(Matrix);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -60,7 +60,7 @@ void Camera::ControlMainCam()
 
 	if (INPUT->KeyPress('W'))
 	{
-		//                                  ÃÊ´ç100¿òÁ÷ÀÓ xyz/s
+		//                                  ì´ˆë‹¹100ì›€ì§ìž„ xyz/s
 		main->MoveWorldPos(main->GetForward() * DELTA * mainCamSpeed);
 	}
 	if (INPUT->KeyPress('S'))
@@ -84,7 +84,7 @@ void Camera::ControlMainCam()
 		main->MoveWorldPos(main->GetUp() * DELTA * mainCamSpeed);
 	}
 
-	//¸¶¿ì½º ¿ìÅ¬¸¯½Ã
+	//ë§ˆìš°ìŠ¤ ìš°í´ë¦­ì‹œ
 	if (INPUT->KeyPress(VK_RBUTTON))
 	{
 		Vector3 Rot;
@@ -92,7 +92,7 @@ void Camera::ControlMainCam()
 		Rot.y = INPUT->movePosition.x * 0.001f;
 		main->rotation += Rot;
 	}
-	//ÈÙÅ°·Î Ä«¸Þ¶ó ¾ÕµÚÁ¶Àý
+	//íœ í‚¤ë¡œ ì¹´ë©”ë¼ ì•žë’¤ì¡°ì ˆ
 	main->MoveWorldPos(main->GetForward() * INPUT->wheelMoveValue.z * DELTA);
 }
 
@@ -131,9 +131,9 @@ void Camera::Update()
 void Camera::Set()
 {
 	{
-		//        RT¿ªÇà·Ä
+		//        RTì—­í–‰ë ¬
 		view = RT.Invert();
-		//RT; //view ¿ªÇà·Ä
+		//RT; //view ì—­í–‰ë ¬
 		if (ortho)
 			proj = Matrix::CreateOrthographic(width, height, nearZ, farZ);
 		else

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum class AnimationState
 {
@@ -13,7 +13,7 @@ class Animation
 public:
 	UINT					frameMax;
 	UINT					boneMax;
-	Matrix** arrFrameBone;//	ÇÁ·¹ÀÓ°¹¼ö* º»°¹¼ö ( local Inverse * ani)
+	Matrix** arrFrameBone;//	í”„ë ˆì„ê°¯ìˆ˜* ë³¸ê°¯ìˆ˜ ( local Inverse * ani)
 	float					tickPerSecond;
 	string					file;
 
@@ -41,7 +41,7 @@ public:
 	~Animations();
 	void Update();
 
-	//ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç¿¡¼­ ´ÙÀ½ ¾Ö´Ï¸ŞÀÌ¼ÇÀ¸·Î ³Ñ¾î°¥ ¾Ö´Ï¸ŞÀÌÅÍ
+	//í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ì—ì„œ ë‹¤ìŒ ì• ë‹ˆë©”ì´ì…˜ìœ¼ë¡œ ë„˜ì–´ê°ˆ ì• ë‹ˆë©”ì´í„°
 	Animator							currentAnimator;
 	Animator							nextAnimator;
 
@@ -53,5 +53,5 @@ public:
 	Matrix	GetFrameBone(int boneIndex);
 	void	ChangeAnimation(AnimationState state, UINT idx, float blendtime = 0.0f);
 	void	RenderDetail();
-	float   GetPlayTime();// 0Ã³À½ ~ 1 ³¡
+	float   GetPlayTime();// 0ì²˜ìŒ ~ 1 ë
 };

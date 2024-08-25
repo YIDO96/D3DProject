@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 LightManager::LightManager()
 {
@@ -6,7 +6,7 @@ LightManager::LightManager()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(DirLight);
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;
@@ -19,7 +19,7 @@ LightManager::LightManager()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(LightBuffer) * MAX_LIGHT;
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;
@@ -86,7 +86,7 @@ Light::~Light()
 Light* Light::Create(string name , int type)
 {
     Light* temp = nullptr;
-    //16°³ »ı¼º Á¦ÇÑ
+    //16ê°œ ìƒì„± ì œí•œ
     for (int i = 0; i < MAX_LIGHT; i++)
     {
         if (not LIGHT->light[i].isActive)

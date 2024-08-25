@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 class Timer : public Singleton<Timer>
 {
 private:
@@ -15,7 +15,7 @@ public:
     Timer();
     bool    GetTick(float& time, float interval);
     void    Chronometry(UINT lock = 60);
-    float   GetDelta()          { return deltaTime; } //∏≈≈©∑Œ X
+    float   GetDelta()          { return deltaTime; } //Îß§ÌÅ¨Î°ú X
     float   GetDeltaTime()      { return deltaScaleTime; }
     UINT    GetFramePerSecond() { return framePerSecond; }
     float   GetWorldTime()      { return worldTime; }

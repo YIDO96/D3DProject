@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 struct FontBrushDesc;
 struct FontTextDesc;
@@ -20,17 +20,17 @@ public:
     ~Dwrite();
     ID2D1DeviceContext* GetDC() { return deviceContext; }
 
-    //Ã¢»çÀÌÁî Á¶Àı
+    //ì°½ì‚¬ì´ì¦ˆ ì¡°ì ˆ
     void CreateBackBuffer(float width, float height);
     void DeleteBackBuffer();
 public:
-    //UI¾È¿¡¼­ ±×¸±¶§
+    //UIì•ˆì—ì„œ ê·¸ë¦´ë•Œ
     void RenderText
     (
         wstring text
         , RECT rect
         , float size = 20.0f
-        , wstring font = L"µ¸¿òÃ¼"
+        , wstring font = L"ë‹ì›€ì²´"
         , Color color = Color(1, 1, 1, 1)
         , DWRITE_FONT_WEIGHT weight = DWRITE_FONT_WEIGHT_NORMAL
         , DWRITE_FONT_STYLE style = DWRITE_FONT_STYLE_NORMAL
@@ -44,7 +44,7 @@ struct FontBrushDesc
 {
     Color color;
     ID2D1SolidColorBrush* brush = NULL;
-    //¿¬»êÀÚ ÀçÁ¤ÀÇ
+    //ì—°ì‚°ì ì¬ì •ì˜
     bool operator==(const FontBrushDesc& val)
     {
         return color.x == val.color.x and

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum class ObType
 {
@@ -48,15 +48,15 @@ public:
 	bool						visible;
 	bool						rootMotion = false;
 
-	class Actor*				root;		//ÁøÂ¥ÃÖ»óÀ§
-	class Actor*				skelRoot;	//½ºÄÌ·¹Åæ ½ÃÀÛ ³ëµå
+	class Actor*				root;		//ì§„ì§œìµœìƒìœ„
+	class Actor*				skelRoot;	//ìŠ¤ì¼ˆë ˆí†¤ ì‹œì‘ ë…¸ë“œ
 	map<string, GameObject*>	children;
 	int                         boneIndex = -1;
 
 
 protected:
 	GameObject();
-	//º»ÀÎ ³ëµå¸¸ º¹»ç»ı¼º
+	//ë³¸ì¸ ë…¸ë“œë§Œ ë³µì‚¬ìƒì„±
 	GameObject(GameObject& src);
 	virtual ~GameObject();
 	void	SaveObject(Xml::XMLElement* This, Xml::XMLDocument* doc);
@@ -75,7 +75,7 @@ public:
 	bool            Intersect(Ray Ray, Vector3& Hit);
 };
 
-//¹è¿ì
+//ë°°ìš°
 class Actor : public GameObject
 {
 	friend class GameObject;
@@ -84,7 +84,7 @@ public:
 	static Actor* Create(Actor* src);
 protected:
 	Actor();
-	//·çÆ®³ëµå¸¸ º¹»ç
+	//ë£¨íŠ¸ë…¸ë“œë§Œ ë³µì‚¬
 	Actor(Actor& src);
 	virtual ~Actor();
 public:
@@ -92,7 +92,7 @@ public:
 	Skeleton*		skeleton;
 	Animations*		anim;
 	int             boneIndexCount = 1;
-	//ÇØ½ÃÅ×ÀÌºí
+	//í•´ì‹œí…Œì´ë¸”
 	unordered_map<string, GameObject*>	obList;
 public:
 	void			ReleaseMember();

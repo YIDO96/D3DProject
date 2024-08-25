@@ -8,11 +8,11 @@ private:
 	Grid*				grid;
 
 	Actor*				temp;
+
 	string				Modelfile;
 	string				Animfile;
-	//임포트해서 가져온 데이터
-	const aiScene*		scene;
-	Assimp::Importer	importer;
+	const aiScene*		scene;		//모델의 모든데이터 접근 가능
+	Assimp::Importer	importer;	//파일을 읽어올객체
 public:
 	Main();
 	~Main();
@@ -23,13 +23,14 @@ public:
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
-	
-	void ReadMaterial();
-	void ReadNode(GameObject* dest, aiNode* src);
-	void ReadBoneNode(GameObject* dest, aiNode* src);
 
+	//					gameobject <-data
 	void ReadMesh(GameObject* dest, aiNode* src);
+
+	void ReadMaterial();
+
 	void ReadSkinMesh(GameObject* dest, aiNode* src);
+	void ReadBoneNode(GameObject* dest, aiNode* src);
 	void ReadBoneData(aiMesh* mesh, vector<class VertexWeights>& vertexWeights);
 
 	Matrix ToMatrix(aiMatrix4x4& value)
@@ -42,9 +43,8 @@ public:
 			value.a4, value.b4, value.c4, value.d4
 		);
 	};
-
-
 };
+
 
 
 
@@ -53,6 +53,8 @@ struct VertexWeights
 {
 	UINT	boneIdx[MAX_WEIGHTS];
 	float	boneWeights[MAX_WEIGHTS];
+
+
 	VertexWeights()
 	{
 		ZeroMemory(boneIdx, sizeof(UINT) * MAX_WEIGHTS);

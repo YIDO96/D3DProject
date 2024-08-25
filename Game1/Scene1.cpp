@@ -76,7 +76,7 @@ void Scene1::LateUpdate()
 
 void Scene1::PreRender()
 {
-    //µğÆÛµå ·»´õÅ¸°Ù 4°³¿¡ ±×¸²À» ·»´õ¸µ
+    //ë””í¼ë“œ ë Œë”íƒ€ê²Ÿ 4ê°œì— ê·¸ë¦¼ì„ ë Œë”ë§
     Camera::main->Set();
     LIGHT->Set();
     deferred->SetTarget();
@@ -86,7 +86,7 @@ void Scene1::PreRender()
 
 void Scene1::Render()
 {
-    //µğÆÛµå ·»´õÅ¸°Ù¿¡ ÀÖ´ø°É ¿Å°Ü¼­ ÇÏ³ªÀÇ ¶óÀÌÆÃ°è»ê
+    //ë””í¼ë“œ ë Œë”íƒ€ê²Ÿì— ìˆë˜ê±¸ ì˜®ê²¨ì„œ í•˜ë‚˜ì˜ ë¼ì´íŒ…ê³„ì‚°
     Camera::main->Set();
     LIGHT->Set();
     //grid->Render();

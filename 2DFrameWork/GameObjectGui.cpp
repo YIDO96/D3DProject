@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 
 bool GameObject::RenderHierarchy()
@@ -388,7 +388,7 @@ void Actor::RenderDetail()
 					}
 					SaveFile(path);
 
-					//¿©±â¿¡ ¼¼ÀÌºê
+					//ì—¬ê¸°ì— ì„¸ì´ë¸Œ
 
 				}
 				ImGui::SameLine();
@@ -409,7 +409,7 @@ void Actor::RenderDetail()
 					}
 					LoadFile(path);
 
-					//¿©±â¿¡ ·Îµå
+					//ì—¬ê¸°ì— ë¡œë“œ
 				}
 				ImGui::EndTabItem();
 			}

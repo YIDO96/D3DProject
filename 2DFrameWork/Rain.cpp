@@ -1,12 +1,12 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
-//±æÃ£±â,ÆÄÆ¼Å¬
+//ê¸¸ì°¾ê¸°,íŒŒí‹°í´
 
 
-//¹°¹Ý»ç¹°±¼Àý
-//µðÆÛµå·»´õ¸µ
-//´ë±â»ê¶õ
-//Å×¼¿·¹ÀÌ¼Ç
+//ë¬¼ë°˜ì‚¬ë¬¼êµ´ì ˆ
+//ë””í¼ë“œë Œë”ë§
+//ëŒ€ê¸°ì‚°ëž€
+//í…Œì…€ë ˆì´ì…˜
 
 void Particle::UpdateParticle()
 {
@@ -31,9 +31,9 @@ void Particle::Gui()
 	{
 		Stop();
 	}
-	//ÇöÀç Àç»ý ½Ã°£
+	//í˜„ìž¬ ìž¬ìƒ ì‹œê°„
 	ImGui::Text("Playtime : %f", PlayTime());
-	//ÃÑ Àç»ýÇÒ ½Ã°£
+	//ì´ ìž¬ìƒí•  ì‹œê°„
 	ImGui::SliderFloat("duration", &duration, 0.0f, 100.0f);
 }
 ID3D11Buffer* Rain::RainBuffer = nullptr;
@@ -43,7 +43,7 @@ void Rain::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(RAIN_DESC);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -77,7 +77,7 @@ Rain* Rain::Create(string name)
 
 void Rain::Render()
 {
-	//ÇÁ·Î±×·¥ ½ÇÇàµÈ ½Ã°£
+	//í”„ë¡œê·¸ëž¨ ì‹¤í–‰ëœ ì‹œê°„
 	desc.time = TIMER->GetWorldTime();
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -113,10 +113,10 @@ void Rain::Reset()
 
 	for (UINT i = 0; i < particleCount; i++)
 	{
-		//ÀÌ¹ÌÁö Å©±â °¡·Î¼¼·Î¸¦ ·£´ý°ª
-		//4~8 »çÀÌ°ª
+		//ì´ë¯¸ì§€ í¬ê¸° ê°€ë¡œì„¸ë¡œë¥¼ ëžœë¤ê°’
+		//4~8 ì‚¬ì´ê°’
 
-		//¿ÀÂ÷°ª
+		//ì˜¤ì°¨ê°’
 		scale.x = RANDOM->Float(-particleScale.x, particleScale.x);
 		scale.y = RANDOM->Float(-particleScale.y, particleScale.y);
 		scale.x = S._11 + scale.x;
@@ -125,7 +125,7 @@ void Rain::Reset()
 		if (scale.y < 1.0f)scale.y = 1.0f;
 
 		Vector3 position;
-		//»ý¼ºµÉÀ§Ä¡   //-4~8   ~ 4~ 8
+		//ìƒì„±ë ìœ„ì¹˜   //-4~8   ~ 4~ 8
 		position.x = RANDOM->Float(-desc.range.x, desc.range.x);
 		position.y = RANDOM->Float(-desc.range.y, desc.range.y);
 		position.z = RANDOM->Float(-desc.range.z, desc.range.z);

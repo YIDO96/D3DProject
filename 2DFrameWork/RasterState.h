@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class RasterState :public Singleton<RasterState>
 {
 private:

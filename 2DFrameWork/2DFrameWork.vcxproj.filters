@@ -138,14 +138,14 @@
     <Filter Include="GameObject\Member">
       <UniqueIdentifier>{09dc338e-ffeb-4250-8eb8-8d54dd34faf9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FIle">
-      <UniqueIdentifier>{f56901cf-2a9d-438c-810e-10eef59d2b88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="State">
       <UniqueIdentifier>{be799d93-e2a2-453f-9c54-cb63513f33a8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render">
       <UniqueIdentifier>{9cb44796-607f-45a2-988f-69e09d717f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FIle">
+      <UniqueIdentifier>{f56901cf-2a9d-438c-810e-10eef59d2b88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

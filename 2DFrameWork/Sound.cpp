@@ -1,16 +1,16 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Sound::Sound()
 {
-    //»ç¿îµå ½Ã½ºÅÛ »ý¼º
+    //ì‚¬ìš´ë“œ ì‹œìŠ¤í…œ ìƒì„±
     System_Create(&system);
-    //»ç¿îµå Ã¤³Î µ¿ÀûÇÒ´ç
+    //ì‚¬ìš´ë“œ ì±„ë„ ë™ì í• ë‹¹
     system->init(32, FMOD_INIT_NORMAL, nullptr);
 }
 
 Sound::~Sound()
 {
-    //»ç¿îµå¸¦ ´Ù »èÁ¦ÇÏ´Â ºÎºÐ
+    //ì‚¬ìš´ë“œë¥¼ ë‹¤ ì‚­ì œí•˜ëŠ” ë¶€ë¶„
     for (auto iter = SoundList.begin(); iter != SoundList.end(); iter++)
     {
         iter->second->channel->stop();
@@ -27,16 +27,16 @@ bool Sound::AddSound(string File, string Key, bool loop)
 {
     string path = "../Contents/Sound/" + File;
 
-    //key Áßº¹ Çã¿ëx
+    //key ì¤‘ë³µ í—ˆìš©x
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖ´Ù.
+    //ì¤‘ë³µëœê²Œ ìžˆë‹¤.
     if (iter != SoundList.end())
     {
         return false;
     }
 
-    //Áßº¹µÈ°Ô ¾ø´Ù.
+    //ì¤‘ë³µëœê²Œ ì—†ë‹¤.
     SoundNode* temp = new SoundNode();
 
     system->createSound
@@ -56,7 +56,7 @@ bool Sound::AddSound(string File, string Key, bool loop)
         temp->sound->setMode(FMOD_LOOP_OFF);
     }
 
-    //¸Ê¿¡ ÇÒ´çÇÑ ¹è¿­ ¿ø¼Ò³Ö±â
+    //ë§µì— í• ë‹¹í•œ ë°°ì—´ ì›ì†Œë„£ê¸°
     SoundList[Key] = temp;
 
     return true;
@@ -66,17 +66,17 @@ bool Sound::DeleteSound(string Key)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ¾ø´Ù.
+    //ì¤‘ë³µëœê²Œ ì—†ë‹¤.
     if (iter == SoundList.end())
     {
         return false;
     }
-    //first°¡ Å°, second ¹ë·ù
+    //firstê°€ í‚¤, second ë°¸ë¥˜
     iter->second->channel->stop();
     iter->second->sound->release();
     delete iter->second;
 
-    //¸Ê¿¡¼­µµ »èÁ¦
+    //ë§µì—ì„œë„ ì‚­ì œ
     SoundList.erase(iter);
 
     return true;
@@ -86,7 +86,7 @@ void Sound::Play(string Key)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖÀ»¶§
+    //ì¤‘ë³µëœê²Œ ìžˆì„ë•Œ
     if (iter != SoundList.end())
     {
         bool isplay;
@@ -107,7 +107,7 @@ void Sound::Stop(string Key)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖÀ»¶§
+    //ì¤‘ë³µëœê²Œ ìžˆì„ë•Œ
     if (iter != SoundList.end())
     {
         iter->second->channel->stop();
@@ -118,7 +118,7 @@ void Sound::Pause(string Key)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖÀ»¶§
+    //ì¤‘ë³µëœê²Œ ìžˆì„ë•Œ
     if (iter != SoundList.end())
     {
         iter->second->channel->setPaused(true);
@@ -129,7 +129,7 @@ void Sound::Resume(string Key)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖÀ»¶§
+    //ì¤‘ë³µëœê²Œ ìžˆì„ë•Œ
     if (iter != SoundList.end())
     {
         iter->second->channel->setPaused(false);
@@ -140,7 +140,7 @@ void Sound::SetVolume(string Key, float scale)
 {
     auto iter = SoundList.find(Key);
 
-    //Áßº¹µÈ°Ô ÀÖÀ»¶§
+    //ì¤‘ë³µëœê²Œ ìžˆì„ë•Œ
     if (iter != SoundList.end())
     {
         iter->second->volume = scale;

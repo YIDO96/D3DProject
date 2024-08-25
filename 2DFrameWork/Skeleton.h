@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #define MAX_BONE 256
 class Skeleton
 {
     static ID3D11Buffer* bonesBuffer;
 public:
     Skeleton() {};
-    //                   ¹öÆÛ¿¡ °»½ÅÇÒ °ª
+    //                   ë²„í¼ì— ê°±ì‹ í•  ê°’
     Matrix				 bones[MAX_BONE];
-    //                   ÆÄÀÏ·Î ¾²¿©Áø°ª
+    //                   íŒŒì¼ë¡œ ì“°ì—¬ì§„ê°’
     Matrix				 bonesOffset[MAX_BONE];// * W
     string               file;
     static void CreateStaticMember();

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 namespace Utility
 {
@@ -22,7 +22,7 @@ namespace Utility
     bool RayIntersectLocalMap(IN Ray WRay, IN GameObject* Terrain, OUT Vector3& HitPoint);
 
 
-    //ÅÛÇÃ¸´ ÇÔ¼ö´Â ¼±¾ğ,Á¤ÀÇ ºĞ¸® ºÒ°¡
+    //í…œí”Œë¦¿ í•¨ìˆ˜ëŠ” ì„ ì–¸,ì •ì˜ ë¶„ë¦¬ ë¶ˆê°€
     template<typename T>
     T Saturate(T src, T min = 0, T max = 1)
     {

@@ -5,7 +5,7 @@ Main::Main()
 {
 
 	//
-	//Åõ¸í ÀÌ¹ÌÁöÃâ·Â °æÈ£Çü123123
+	//íˆ¬ëª… ì´ë¯¸ì§€ì¶œë ¥ ê²½í˜¸í˜•123123
 }
 
 Main::~Main()
@@ -70,7 +70,7 @@ void Main::ResizeScreen()
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, int command)
 {
-	App.SetAppName(L"Game2");
+	App.SetAppName(L"EmberWild");
 	App.SetInstance(instance);
 	WIN->Create();
 	D3D->Create();

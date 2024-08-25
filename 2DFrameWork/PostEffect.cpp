@@ -1,4 +1,4 @@
-#include "framework.h"
+Ôªø#include "framework.h"
 
 PostEffect::PostEffect()
 {
@@ -9,7 +9,7 @@ PostEffect::PostEffect()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(PSP);
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ªÛºˆπˆ∆€
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ÏÉÅÏàòÎ≤ÑÌçº
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;

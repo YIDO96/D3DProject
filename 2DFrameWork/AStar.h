@@ -1,25 +1,25 @@
-#pragma once
+ï»¿#pragma once
 
 
 class Tile
 {
 public:
-    int         F, G, H;//Å¸ÀÏ ºñ¿ë
-    Tile*       P;      //³ª¸¦ °»½Å½ÃÅ² Å¸ÀÏ
-    bool        isFind; //°Ë»çÇÑÀûÀÌ ÀÖ´Â°¡?
+    int         F, G, H;//íƒ€ì¼ ë¹„ìš©
+    Tile*       P;      //ë‚˜ë¥¼ ê°±ì‹ ì‹œí‚¨ íƒ€ì¼
+    bool        isFind; //ê²€ì‚¬í•œì ì´ ìˆëŠ”ê°€?
 
 
-    int         idxX, idxZ;    //Å¸ÀÏ ÀÎµ¦½º
+    int         idxX, idxZ;    //íƒ€ì¼ ì¸ë±ìŠ¤
     bool        pass = true;
     Vector3     pos;
 
-    void ClearCost();         //ºñ¿ë ÃÊ±âÈ­
-    void ClacH(Tile& Dest,float scale); //H°è»êÇØ¶ó
+    void ClearCost();         //ë¹„ìš© ì´ˆê¸°í™”
+    void ClacH(Tile& Dest,float scale); //Hê³„ì‚°í•´ë¼
 };
 
 struct compare
 {
-    //¿¬»êÀÚ ¿À¹ö·Îµù
+    //ì—°ì‚°ì ì˜¤ë²„ë¡œë”©
     bool operator()(Tile* a, Tile* b)
     {
         return a->F > b->F;
@@ -29,10 +29,10 @@ struct compare
 class AStar
 {
 private:
-    Terrain*    target;     //³ª´­ ¸Ê
-    int         size;       //³ª´­ °¹¼ö
+    Terrain*    target;     //ë‚˜ëˆŒ ë§µ
+    int         size;       //ë‚˜ëˆŒ ê°¯ìˆ˜
     float       scale;
-    vector<vector<Tile>>    Tiles;  //±æÃ£±â¿¡ ÇÊ¿äÇÑ ³ëµå 2Â÷¿ø°¹¼ö
+    vector<vector<Tile>>    Tiles;  //ê¸¸ì°¾ê¸°ì— í•„ìš”í•œ ë…¸ë“œ 2ì°¨ì›ê°¯ìˆ˜
 public:
     AStar();
     void    CreateNode(Terrain* map, int size);

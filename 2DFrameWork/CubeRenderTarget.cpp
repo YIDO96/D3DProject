@@ -1,4 +1,4 @@
-#include "framework.h"
+Ôªø#include "framework.h"
 ID3D11Buffer* CubeRenderTarget::camBuffer = nullptr;
 ID3D11Buffer* CubeRenderTarget::shadowPosBuffer = nullptr;
 void CubeRenderTarget::CreateBackBuffer(float width, float height)
@@ -120,7 +120,7 @@ void CubeRenderTarget::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(GSCamBuffer);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ªÛºˆπˆ∆€
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ÏÉÅÏàòÎ≤ÑÌçº
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;
@@ -132,7 +132,7 @@ void CubeRenderTarget::CreateStaticMember()
 		D3D11_BUFFER_DESC desc = { 0 };
 		desc.ByteWidth = sizeof(Vector4);
 		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ªÛºˆπˆ∆€
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ÏÉÅÏàòÎ≤ÑÌçº
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		desc.MiscFlags = 0;
 		desc.StructureByteStride = 0;

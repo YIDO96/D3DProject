@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 AStar::AStar()
 {
@@ -20,7 +20,7 @@ void AStar::CreateNode(Terrain* map, int size)
         Tiles[z].resize(size);
     }
 
-    //ºĞÇÒ À§Ä¡¸¶´Ù ³ëµå Ãß°¡
+    //ë¶„í•  ìœ„ì¹˜ë§ˆë‹¤ ë…¸ë“œ ì¶”ê°€
     Ray top;
     top.direction = Vector3(0, -1, 0);
 
@@ -46,7 +46,7 @@ void AStar::CreateNode(Terrain* map, int size)
                 if (k->second->collider)
                 {
                     //k->second->Update();
-                    //Äİ¶óÀÌ´õ¶û ÁÂÇ¥¶û Ãæµ¹ÇÏ¸é º®À¸·Î ¸¸µê
+                    //ì½œë¼ì´ë”ë‘ ì¢Œí‘œë‘ ì¶©ëŒí•˜ë©´ ë²½ìœ¼ë¡œ ë§Œë“¦
                     if (k->second->collider->Intersect(Pos))
                     {
                         Tiles[z][x].pass = false;
@@ -77,7 +77,7 @@ void AStar::ResizeNode(int size)
         Tiles[z].resize(size);
     }
 
-    //ºĞÇÒ À§Ä¡¸¶´Ù ³ëµå Ãß°¡
+    //ë¶„í•  ìœ„ì¹˜ë§ˆë‹¤ ë…¸ë“œ ì¶”ê°€
     Ray top;
     top.direction = Vector3(0, -1, 0);
 
@@ -120,7 +120,7 @@ bool AStar::GetNearNode(Vector3 coord, int& idxX, int& idxZ)
     //w=1
     coord = Vector3::Transform(coord, inverse);
 
-    //Terrain Áß½ÉÁ¡ 0,0,0ÀÌ °¡¿îµ¥°¡ ¾Æ´Ñ ¿ŞÂÊ»ó´ÜÀÌ 0,0,0ÀÌ µÇ°Ô²û ÀÌµ¿
+    //Terrain ì¤‘ì‹¬ì  0,0,0ì´ ê°€ìš´ë°ê°€ ì•„ë‹Œ ì™¼ìª½ìƒë‹¨ì´ 0,0,0ì´ ë˜ê²Œë” ì´ë™
 
    
     float half = target->garo * 0.5f;
@@ -139,7 +139,7 @@ bool AStar::GetNearNode(Vector3 coord, int& idxX, int& idxZ)
         return false;
     }
 
-    //º¯È¯µÇ´Â ÁÂÇ¥°¡ Á¸Àç
+    //ë³€í™˜ë˜ëŠ” ì¢Œí‘œê°€ ì¡´ì¬
     idxX = TerrainIdxX;
     idxZ = TerrainIdxZ;
 
@@ -162,13 +162,13 @@ bool AStar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
         return false;
     }
 
-    //±âÁ¸¿¡ ÀÖ´ø ±æÀº ÀüºÎ ºñ¿î´Ù.
+    //ê¸°ì¡´ì— ìˆë˜ ê¸¸ì€ ì „ë¶€ ë¹„ìš´ë‹¤.
     way.clear();
 
-    //Ãâ¹ßÁö ¸ñÀûÁö °°À¸¸é
+    //ì¶œë°œì§€ ëª©ì ì§€ ê°™ìœ¼ë©´
     if (sourX == destX and sourZ == destZ)
     {
-        return false;//Á¦ÀÚ¸® ¸ØÃß±â
+        return false;//ì œìë¦¬ ë©ˆì¶”ê¸°
     }
 
     for (int z = 0; z < size; z++)
@@ -180,82 +180,82 @@ bool AStar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
     }
     priority_queue<Tile*, vector<Tile*>, compare> List;
 
-    //¸®½ºÆ®¿¡ Ãâ¹ßÁö¸¦ Ãß°¡
+    //ë¦¬ìŠ¤íŠ¸ì— ì¶œë°œì§€ë¥¼ ì¶”ê°€
     Tile* pTemp = &Tiles[sourZ][sourX];
-    pTemp->G = 0;       //Ãâ¹ßÁö ÇöÀçºñ¿ëÀº 0
-    pTemp->ClacH(Tiles[destZ][destX], scale); //¸ñÀûÁö±îÁö ¿¹»óºñ¿ë ¸¸µé±â
+    pTemp->G = 0;       //ì¶œë°œì§€ í˜„ì¬ë¹„ìš©ì€ 0
+    pTemp->ClacH(Tiles[destZ][destX], scale); //ëª©ì ì§€ê¹Œì§€ ì˜ˆìƒë¹„ìš© ë§Œë“¤ê¸°
     pTemp->F = pTemp->G + pTemp->H;
     List.push(pTemp);
 
-    //µµÂøÁ¡±îÁö ºñ¿ëÀÌ »ı±æ¶§ ±îÁö ¹İº¹
+    //ë„ì°©ì ê¹Œì§€ ë¹„ìš©ì´ ìƒê¸¸ë•Œ ê¹Œì§€ ë°˜ë³µ
     while (1)
     {
-        //²¨³»¾ßµÉ F°ªÀÌ ´õÀÌ»ó ¾øÀ»¶§
+        //êº¼ë‚´ì•¼ë  Fê°’ì´ ë”ì´ìƒ ì—†ì„ë•Œ
         if (List.empty())
         {
             return false;
         }
 
-        //Å½»ö³ëµå ¹Ş¾Æ¿À±â
+        //íƒìƒ‰ë…¸ë“œ ë°›ì•„ì˜¤ê¸°
         Tile* Temp = List.top();
-        //Å½»ö¸ñ·Ï¿¡¼­ Á¦¿Ü
+        //íƒìƒ‰ëª©ë¡ì—ì„œ ì œì™¸
         Temp->isFind = true;
-        //¸ÇÀ­°ª »©¹ö¸®±â
+        //ë§¨ìœ—ê°’ ë¹¼ë²„ë¦¬ê¸°
         List.pop();
 
-        //¸ÇÀ­°ªÀÌ µµÂøÁ¡ÀÌ¸é Á¾·á(±æÃ£±â Á¾·áÁ¶°Ç)
+        //ë§¨ìœ—ê°’ì´ ë„ì°©ì ì´ë©´ ì¢…ë£Œ(ê¸¸ì°¾ê¸° ì¢…ë£Œì¡°ê±´)
         if (Temp->idxX == destX and Temp->idxZ == destZ)
         {
             break;
         }
 
-        //ÀÎÁ¢ Å¸ÀÏ ºñ¿ë°Ë»ç
+        //ì¸ì ‘ íƒ€ì¼ ë¹„ìš©ê²€ì‚¬
         vector<Int2> LoopIdx;
 
-        //¿ŞÂÊÅ¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì™¼ìª½íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxX > 0)
         {
             LoopIdx.push_back(Int2(Temp->idxX - 1,
                 Temp->idxZ));
         }
-        //À§ÂÊÅ¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ìœ„ìª½íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxZ > 0)
         {
             LoopIdx.push_back(Int2(Temp->idxX,
                 Temp->idxZ - 1));
         }
-        //¿À¸¥ÂÊÅ¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì˜¤ë¥¸ìª½íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxX < size - 1)
         {
             LoopIdx.push_back(Int2(Temp->idxX + 1,
                 Temp->idxZ));
         }
-        //¾Æ·¡ÂÊÅ¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì•„ë˜ìª½íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxZ < size - 1)
         {
             LoopIdx.push_back(Int2(Temp->idxX,
                 Temp->idxZ + 1));
         }
 
-        //¿ŞÂÊ À§Å¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì™¼ìª½ ìœ„íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxX > 0 and Temp->idxZ > 0)
         {
             LoopIdx.push_back(Int2(Temp->idxX - 1,
                 Temp->idxZ -1));
         }
-        //¿ŞÂÊ ¾Æ·¡ Á¸ÀçÇÒ¶§
+        //ì™¼ìª½ ì•„ë˜ ì¡´ì¬í• ë•Œ
         if (Temp->idxZ > 0 and Temp->idxZ < size - 1)
         {
             LoopIdx.push_back(Int2(Temp->idxX - 1,
                 Temp->idxZ + 1));
         }
-        //¿À¸¥ÂÊ À§Å¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì˜¤ë¥¸ìª½ ìœ„íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxX < size - 1 and Temp->idxZ > 0)
         {
             LoopIdx.push_back(Int2(Temp->idxX + 1,
                 Temp->idxZ - 1));
         }
-        //¿À¸¥ÂÊ ¾Æ·¡ Å¸ÀÏÀÌ Á¸ÀçÇÒ¶§
+        //ì˜¤ë¥¸ìª½ ì•„ë˜ íƒ€ì¼ì´ ì¡´ì¬í• ë•Œ
         if (Temp->idxX < size - 1 and Temp->idxZ < size - 1)
         {
             LoopIdx.push_back(Int2(Temp->idxX + 1,
@@ -263,28 +263,28 @@ bool AStar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
         }
 
 
-        //»óÇÏÁÂ¿ìÅ¸ÀÏ ºñ¿ë°Ë»ç
+        //ìƒí•˜ì¢Œìš°íƒ€ì¼ ë¹„ìš©ê²€ì‚¬
         for (int i = 0; i < LoopIdx.size(); i++)
         {
             Tile* loop =
                 &Tiles[LoopIdx[i].y][LoopIdx[i].x];
 
-            //º®ÀÌ ¾Æ´Ò¶§ and y°ªÀÌ ¸¹ÀÌ Â÷ÀÌ°¡ ¾È³­´Ù¸é
+            //ë²½ì´ ì•„ë‹ë•Œ and yê°’ì´ ë§ì´ ì°¨ì´ê°€ ì•ˆë‚œë‹¤ë©´
             if (loop->pass != false )
             {
-                //¿¹»óºñ¿ë ¸¸µé±â
+                //ì˜ˆìƒë¹„ìš© ë§Œë“¤ê¸°
                 loop->ClacH(Tiles[destZ][destX], scale);
                 Vector3 dis = loop->pos - Temp->pos;
                 float len = dis.Length();
-                //ÇöÀç °¡Áö°íÀÖ´Â ºñ¿ëÀÌ Å¬¶§
+                //í˜„ì¬ ê°€ì§€ê³ ìˆëŠ” ë¹„ìš©ì´ í´ë•Œ
                 if (loop->G > (Temp->G + len))
                 {
-                    //ºñ¿ë°»½Å
+                    //ë¹„ìš©ê°±ì‹ 
                     loop->G = Temp->G + len;
                     loop->F = loop->G + loop->H;
-                    //´©±¸·ÎºÎÅÍ °»½ÅÀÎÁö Ç¥½Ã
+                    //ëˆ„êµ¬ë¡œë¶€í„° ê°±ì‹ ì¸ì§€ í‘œì‹œ
                     loop->P = Temp;
-                    //ÀÌ Å¸ÀÏÀÌ Ã£ÀºÀû ¾ø´ø Å¸ÀÏÀÌ¸é ¸®½ºÆ®¿¡ Ãß°¡
+                    //ì´ íƒ€ì¼ì´ ì°¾ì€ì  ì—†ë˜ íƒ€ì¼ì´ë©´ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                     if (!loop->isFind)
                     {
                         List.push(loop);
@@ -294,13 +294,13 @@ bool AStar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
         }
         LoopIdx.clear();
 
-        //´ë°¢¼±4°³ 
+        //ëŒ€ê°ì„ 4ê°œ 
 
 
 
 
     }
-    //µµÂøÁö°¡ ¼³Á¤ÀÌ µÇ¾úÀ»¶§
+    //ë„ì°©ì§€ê°€ ì„¤ì •ì´ ë˜ì—ˆì„ë•Œ
     Tile* p = &Tiles[destZ][destX];
     //dest 4,1 -> 4,2 -> 4,3 -> 3,3 ->2,3-> 1,3 ->
     while (1)
@@ -317,7 +317,7 @@ bool AStar::PathFinding(Vector3 start, Vector3 end, OUT vector<Vector3>& way)
 
 void Tile::ClearCost()
 {
-    //ºñ¿ëÀ» ¹«ÇÑ°ªÀ¸·Î ÃÊ±âÈ­
+    //ë¹„ìš©ì„ ë¬´í•œê°’ìœ¼ë¡œ ì´ˆê¸°í™”
     F = G = H = INT_MAX;
     P = nullptr;
     isFind = false;
@@ -325,7 +325,7 @@ void Tile::ClearCost()
 
 void Tile::ClacH(Tile& Dest, float scale)
 {
-    //³ÊÀÇ ¸ñÀûÁö±îÁöÀÇ ¿¹»óºñ¿ëÀ» °è»êÇØ¶ó
+    //ë„ˆì˜ ëª©ì ì§€ê¹Œì§€ì˜ ì˜ˆìƒë¹„ìš©ì„ ê³„ì‚°í•´ë¼
     int tempX = abs(idxX - Dest.idxX) * scale;
     int tempY = abs(idxZ - Dest.idxZ) * scale;
 

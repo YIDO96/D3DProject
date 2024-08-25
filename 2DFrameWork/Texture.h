@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 class Texture 
 {
-	ID3D11SamplerState*				Sampler;	//»ùÇÃ·¯
+	ID3D11SamplerState*				Sampler;	//ìƒ˜í”ŒëŸ¬
 public:
-	ID3D11ShaderResourceView*		srv;		//ÅØ½ºÃÄÀÚ¿ø
+	ID3D11ShaderResourceView*		srv;		//í…ìŠ¤ì³ìì›
 	string							file;
 	D3D11_SAMPLER_DESC			    SamplerDesc;
 	Texture();

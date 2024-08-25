@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 
 ID3D11Buffer* Material::materialBuffer = nullptr;
 
@@ -36,7 +36,7 @@ void Material::CreateStaticMember()
     D3D11_BUFFER_DESC desc = { 0 };
     desc.ByteWidth = sizeof(MaterialBuffer);
     desc.Usage = D3D11_USAGE_DYNAMIC;
-    desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+    desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
     desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
     desc.MiscFlags = 0;
     desc.StructureByteStride = 0;
@@ -52,7 +52,7 @@ void Material::DeleteStaticMember()
 
 void Material::Set()
 {
-    //»ó¼ö¹öÆÛ
+    //ìƒìˆ˜ë²„í¼
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     D3D->GetDC()->Map(materialBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
     memcpy_s(mappedResource.pData, sizeof(MaterialBuffer), (MaterialBuffer*)this, sizeof(MaterialBuffer));

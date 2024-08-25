@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class UI : public Actor
 {
 	bool			 Press = false;
@@ -8,10 +8,10 @@ public:
 	bool			MouseOver(class Camera* cam = Camera::main);
 	void			RenderDetail();
 
-	function<void()> mouseOver = nullptr; //¸¶¿ì½º°¡ À§¿¡Á¸ÀçÇÒ‹š
-	function<void()> mouseDown = nullptr; // À§¿¡¼­ ´­·¶À»¶§ ÇÑ¹ø
-	function<void()> mousePress = nullptr; // ´©¸£°í ÀÖÀ»¶§
-	function<void()> mouseUp = nullptr; //´©¸£°í ¶¼¾úÀ»¶§
+	function<void()> mouseOver = nullptr; //ë§ˆìš°ìŠ¤ê°€ ìœ„ì—ì¡´ì¬í• ë–„
+	function<void()> mouseDown = nullptr; // ìœ„ì—ì„œ ëˆŒë €ì„ë•Œ í•œë²ˆ
+	function<void()> mousePress = nullptr; // ëˆ„ë¥´ê³  ìˆì„ë•Œ
+	function<void()> mouseUp = nullptr; //ëˆ„ë¥´ê³  ë–¼ì—ˆì„ë•Œ
 
 	virtual void	Update() override;
 	void			Render(shared_ptr<Shader> pShader = nullptr);
