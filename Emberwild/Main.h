@@ -6,13 +6,15 @@ private:
 	Camera* cam1;
 	Grid* grid;
 
+
+
 public:
 	Main();
 	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //ÇØÁ¦
+	virtual void Release() override; //?´ì œ
 	virtual void Update() override;
-	virtual void LateUpdate() override;//°»½Å
+	virtual void LateUpdate() override;//ê°±ì‹ 
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
