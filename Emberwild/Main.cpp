@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "Main.h"
 
 Main::Main()
@@ -70,7 +70,7 @@ void Main::ResizeScreen()
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, int command)
 {
-	App.SetAppName(L"Game2");
+	App.SetAppName(L"EmberWild");
 	App.SetInstance(instance);
 	WIN->Create();
 	D3D->Create();

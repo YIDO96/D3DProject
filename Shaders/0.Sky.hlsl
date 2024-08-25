@@ -1,4 +1,4 @@
-#include "Common.hlsl"
+ï»¿#include "Common.hlsl"
 
 struct VertexInput
 {
@@ -28,13 +28,13 @@ float4 PS(PixelInput input) : SV_TARGET
     float4 BaseColor = float4(1, 1, 1, 1);
     
    
-     //¹°Ã¼¿¡¼­ ³ª¿À´Â ¹æÇâ(±¸)
+     //ë¬¼ì²´ì—ì„œ ë‚˜ì˜¤ëŠ” ë°©í–¥(êµ¬)
 	float3 Nor = normalize(input.Uv.xyz);
     
    
     
     
-    //Å¥ºê¸Ê¿¡¼­ °¡Á®¿Â »ö
+    //íë¸Œë§µì—ì„œ ê°€ì ¸ì˜¨ ìƒ‰
 	BaseColor = TextureBG.Sample(SamplerBG, input.Uv);
     
 

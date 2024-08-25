@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Main.h"
 
 Main::Main()
@@ -32,6 +32,7 @@ void Main::Release()
 
 void Main::Update()
 {
+    LIGHT->RenderDetail();
     Camera::main->ControlMainCam();
     Camera::main->Update();
 
@@ -42,71 +43,62 @@ void Main::Update()
     ImGui::End();
 
     ImGui::Begin("AssetImporter");
-    if (GUI->FileImGui("BonelessChicken", "BonelessChicken",
-        ".fbx,.obj,.x,.dae", "../Assets"))
+    if (GUI->FileImGui("ModelImporter(without skeleton)","ModelImporter(without skeleton)",
+        ".fbx,.obj,.x,.blend","../Assets"))
     {
         Modelfile = ImGuiFileDialog::Instance()->GetCurrentFileName();
         string path = "../Assets/" + Modelfile;
 
-        importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, false);
-        scene = importer.ReadFile
-        (
-            path,
+        //importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, false);
+        scene = importer.ReadFile(path,
             aiProcess_ConvertToLeftHanded
             | aiProcess_Triangulate
             | aiProcess_GenUVCoords
             | aiProcess_GenNormals
-            | aiProcess_CalcTangentSpace
-        );
+            | aiProcess_CalcTangentSpace);
         assert(scene != NULL and "Import Error");
 
-        //ë©”ì‰¬ë§Œ ì½ì–´ì™€ì„œ ì•¡í„°êµ¬ì„±
+        temp = Actor::Create(Modelfile.substr(0,
+            Modelfile.find_last_of('.')));
 
-        temp = Actor::Create("Root");
-
-        //ë¨¸í„°ë¦¬ì–¼ ì½ê¸°
         ReadMaterial();
-
         temp->AddChild(GameObject::Create(scene->mRootNode->mName.C_Str()));
-        //ë…¸ë“œ ì½ê¸°
-        ReadNode(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
 
-        //ë©”ì‰¬ ë°ì´í„°ì½ê¸°
         ReadMesh(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
         importer.FreeScene();
-    }
 
-    if (GUI->FileImGui("BoneChicken", "BoneChicken",
-        ".fbx,.obj,.x,.dae", "../Assets"))
+    }
+    if (GUI->FileImGui("ModelImporter(with skeleton)", "ModelImporter(with skeleton)",
+        ".fbx,.obj,.x", "../Assets"))
     {
         Modelfile = ImGuiFileDialog::Instance()->GetCurrentFileName();
         string path = "../Assets/" + Modelfile;
 
         importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, false);
-        scene = importer.ReadFile
-        (
-            path,
+        scene = importer.ReadFile(path,
             aiProcess_ConvertToLeftHanded
             | aiProcess_Triangulate
             | aiProcess_GenUVCoords
             | aiProcess_GenNormals
-            | aiProcess_CalcTangentSpace
-        );
+            | aiProcess_CalcTangentSpace);
         assert(scene != NULL and "Import Error");
 
-        //ë©”ì‰¬ë§Œ ì½ì–´ì™€ì„œ ì•¡í„°êµ¬ì„±
+        temp = Actor::Create(Modelfile.substr(0,
+            Modelfile.find_last_of('.')));
 
-        temp = Actor::Create("Root");
         temp->skeleton = new Skeleton();
         temp->boneIndex = 0;
 
-      
-
-        ////ë¨¸í„°ë¦¬ì–¼ ì½ê¸°
+        //¸ÓÅÍ¸®¾ó·Îµå
         ReadMaterial();
+        temp->AddBone(GameObject::Create("OffsetCam"));
+        temp->Find("OffsetCam")->AddBone(Camera::Create("Cam"));
+        temp->AddBone(GameObject::Create("OffsetRotation"));
 
-        temp->AddBone(GameObject::Create(scene->mRootNode->mName.C_Str()));
-        //ë…¸ë“œ ì½ê¸°
+
+        //½ºÄÌ·¹Åæ ±¸¼º (·çÆ®³ëµå)
+        temp->Find("OffsetRotation")->AddBone(GameObject::Create(scene->mRootNode->mName.C_Str()));
+
         ReadBoneNode(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
         {
             int tok = Modelfile.find_last_of(".");
@@ -119,7 +111,6 @@ void Main::Update()
             string filePath = Modelfile.substr(0, tok) + "/";
             temp->skeleton->file = filePath + Modelfile.substr(0, tok) + ".skel";
             temp->skeleton->SaveFile(temp->skeleton->file);
-
         }
 
         for (auto it = temp->obList.begin();
@@ -127,13 +118,11 @@ void Main::Update()
         {
             it->second->skelRoot = temp;
         }
-        ////ë©”ì‰¬ ë°ì´í„°ì½ê¸°
+        //¸Ş½¬ µ¥ÀÌÅÍÀĞ±â
         ReadSkinMesh(temp->Find(scene->mRootNode->mName.C_Str()), scene->mRootNode);
-        
         importer.FreeScene();
     }
-
-    if (GUI->FileImGui("AnimationImporter", "AnimationImporter",
+    if (GUI->FileImGui("AnimationImporter(with skeleton)", "AnimationImporter(with skeleton)",
         ".fbx,.obj,.x", "../Assets"))
     {
         Animfile = ImGuiFileDialog::Instance()->GetCurrentFileName();
@@ -154,7 +143,7 @@ void Main::Update()
         {
             temp->anim = new Animations();
         }
-        //ì• ë‹ˆë©”ì´ì…˜ ê°¯ìˆ˜
+        //¾Ö´Ï¸ŞÀÌ¼Ç °¹¼ö
         for (UINT i = 0; i < scene->mNumAnimations; i++)
         {
             shared_ptr<Animation> Anim = make_shared<Animation>();
@@ -164,7 +153,7 @@ void Main::Update()
 
             size_t tok2 = Animfile.find_last_of(".");
             Anim->file = Animfile.substr(0, tok2) + to_string(i);
-            //  0, ë§ˆì§€ë§‰í”„ë ˆì„ê¹Œì§€ ì¡´ì¬
+            //  0, ¸¶Áö¸·ÇÁ·¹ÀÓ±îÁö Á¸Àç
             Anim->frameMax = (int)srcAnim->mDuration + 1;
             Anim->tickPerSecond = srcAnim->mTicksPerSecond != 0.0 ? (float)srcAnim->mTicksPerSecond : 25.0f;
             Anim->boneMax = temp->boneIndexCount;
@@ -177,7 +166,7 @@ void Main::Update()
 
 
 
-            //ì±„ë„ê°¯ìˆ˜ -> ë³¸ì— ëŒ€ì‘
+            //Ã¤³Î°¹¼ö -> º»¿¡ ´ëÀÀ
             for (UINT j = 0; j < srcAnim->mNumChannels; j++)
             {
                 AnimNode* animNode = new AnimNode();
@@ -235,13 +224,13 @@ void Main::Update()
                         Anim->arrFrameBone[k][chanel->boneIndex] = chanel->GetLocal().Invert() * W;
                     }
                 }
-                //ì—¬ê¸°ì„œ ì±„ë„ë(ë³¸)
+                //¿©±â¼­ Ã¤³Î³¡(º»)
 
             }
-            //ì—¬ê¸°ì„œ ì• ë‹˜ë
+            //¿©±â¼­ ¾Ö´Ô³¡
             temp->anim->playList.push_back(Anim);
 
-            //ë°©ê¸ˆ ì¶”ê°€í•œ ì• ë‹ˆë©”ì´ì…˜ íŒŒì¼ë¡œ ì €ì¥
+            //¹æ±İ Ãß°¡ÇÑ ¾Ö´Ï¸ŞÀÌ¼Ç ÆÄÀÏ·Î ÀúÀå
             {
                 size_t tok = Modelfile.find_last_of(".");
                 string checkPath = "../Contents/Animation/" + Modelfile.substr(0, tok);
@@ -260,8 +249,13 @@ void Main::Update()
         importer.FreeScene();
     }
 
-
     ImGui::End();
+
+
+
+
+
+
 
 
     grid->Update();
@@ -281,6 +275,7 @@ void Main::PreRender()
 void Main::Render()
 {
     Camera::main->Set();
+    LIGHT->Set();
     BLEND->Set(false);
 
     grid->Render();
@@ -300,358 +295,9 @@ void Main::ResizeScreen()
 
    
 }
-
-void Main::ReadMaterial()
-{
-    for (UINT i = 0; i < scene->mNumMaterials; i++)
-    {
-        aiMaterial* srcMtl = scene->mMaterials[i];
-        
-        Material* destMtl = new Material();
-        //ì´ë¦„ -í‚¤ê°’
-        destMtl->file = srcMtl->GetName().C_Str();
-
-        aiColor3D ambient;
-        srcMtl->Get(AI_MATKEY_COLOR_AMBIENT, ambient);
-        destMtl->ambient.x = ambient.r;
-        destMtl->ambient.y = ambient.g;
-        destMtl->ambient.z = ambient.b;
-
-
-        aiColor3D diffuse;
-        srcMtl->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
-        destMtl->diffuse.x = diffuse.r;
-        destMtl->diffuse.y = diffuse.g;
-        destMtl->diffuse.z = diffuse.b;
-
-
-        aiColor3D specular;
-        srcMtl->Get(AI_MATKEY_COLOR_SPECULAR, specular);
-        destMtl->specular.x = specular.r;
-        destMtl->specular.y = specular.g;
-        destMtl->specular.z = specular.b;
-
-
-        aiColor3D emissive;
-        srcMtl->Get(AI_MATKEY_COLOR_EMISSIVE, emissive);
-        destMtl->emissive.x = emissive.r;
-        destMtl->emissive.y = emissive.g;
-        destMtl->emissive.z = emissive.b;
-
-        //Shininess
-        srcMtl->Get(AI_MATKEY_SHININESS, destMtl->shininess);
-        //opacity
-        srcMtl->Get(AI_MATKEY_OPACITY, destMtl->opacity);
-
-        //Normal
-        {
-            aiString aifile;
-            string TextureFile;
-            aiReturn texFound;
-            texFound = srcMtl->GetTexture(aiTextureType_NORMALS, 0, &aifile);
-            TextureFile = aifile.C_Str();
-            size_t index = TextureFile.find_last_of('/');
-            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
-
-
-
-            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
-            if (texFound == AI_SUCCESS && Modelfile != "")
-            {
-                destMtl->ambient.w = 1.0f;
-                destMtl->normalMap = make_shared<Texture>();
-
-                size_t tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-                string orgin = "../Assets/" + TextureFile;
-                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
-                bool isCheck = true;
-                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
-
-                destMtl->normalMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
-
-            }
-        }
-
-        //Diffuse
-        {
-            aiString aifile;
-            string TextureFile;
-            aiReturn texFound;
-            texFound = srcMtl->GetTexture(aiTextureType_DIFFUSE, 0, &aifile);
-            TextureFile = aifile.C_Str();
-            size_t index = TextureFile.find_last_of('/');
-            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
-
-            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
-            if (texFound == AI_SUCCESS && Modelfile != "")
-            {
-                destMtl->diffuse.w = 1.0f;
-                destMtl->diffuseMap = make_shared<Texture>();
-
-                size_t tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-                string orgin = "../Assets/" + TextureFile;
-                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
-                bool isCheck = true;
-                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
-
-                destMtl->diffuseMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
-
-            }
-        }
-
-        //specular
-        {
-            aiString aifile;
-            string TextureFile;
-            aiReturn texFound;
-            texFound = srcMtl->GetTexture(aiTextureType_SPECULAR, 0, &aifile);
-            TextureFile = aifile.C_Str();
-            size_t index = TextureFile.find_last_of('/');
-            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
-
-            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
-            if (texFound == AI_SUCCESS && Modelfile != "")
-            {
-                destMtl->specular.w = 1.0f;
-                destMtl->specularMap = make_shared<Texture>();
-
-                size_t tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-                string orgin = "../Assets/" + TextureFile;
-                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
-                bool isCheck = true;
-                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
-
-                destMtl->specularMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
-
-            }
-        }
-
-        //emissive
-        {
-            aiString aifile;
-            string TextureFile;
-            aiReturn texFound;
-            texFound = srcMtl->GetTexture(aiTextureType_EMISSIVE, 0, &aifile);
-            TextureFile = aifile.C_Str();
-            size_t index = TextureFile.find_last_of('/');
-            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
-
-            //í…ìŠ¤ì³ê°€ ìˆë‹¤.
-            if (texFound == AI_SUCCESS && Modelfile != "")
-            {
-                destMtl->emissive.w = 1.0f;
-                destMtl->emissiveMap = make_shared<Texture>();
-
-                size_t tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-                string orgin = "../Assets/" + TextureFile;
-                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
-                bool isCheck = true;
-                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
-
-                destMtl->emissiveMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
-
-            }
-        }
-
-
-
-
-
-
-        size_t tok = Modelfile.find_last_of(".");
-        string checkPath = "../Contents/Material/" + Modelfile.substr(0, tok);
-        if (!PathFileExistsA(checkPath.c_str()))
-        {
-            CreateDirectoryA(checkPath.c_str(), NULL);
-        }
-
-        string filePath = Modelfile.substr(0, tok) + "/";
-        destMtl->file = filePath + destMtl->file + ".mtl";
-        destMtl->SaveFile(destMtl->file);
-
-    }
-
-}
-
-void Main::ReadNode(GameObject* dest, aiNode* src)
-{
-    Matrix tempMat = ToMatrix(src->mTransformation);
-    Vector3 s, r, t; Quaternion q;
-    tempMat.Decompose(s, q, t);
-    r = Utility::QuaternionToYawPtichRoll(q);
-    dest->scale = s; dest->rotation = r; dest->SetLocalPos(t);
-
-    temp->Update();
-   
-    for (UINT i = 0; i < src->mNumChildren; i++)
-    {
-        GameObject* child =
-            GameObject::Create(src->mChildren[i]->mName.C_Str());
-
-        //ì„ì‹œ
-        child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
-
-        dest->AddChild(child);
-
-        ReadNode(child, src->mChildren[i]);
-    }
-}
-
-void Main::ReadBoneNode(GameObject* dest, aiNode* src)
-{
-
-    Matrix tempMat = ToMatrix(src->mTransformation);
-    Vector3 s, r, t; Quaternion q;
-    tempMat.Decompose(s, q, t);
-    r = Utility::QuaternionToYawPtichRoll(q);
-    dest->scale = s; dest->rotation = r; dest->SetLocalPos(t);
-
-    temp->Update();
-    dest->root->skeleton->bonesOffset[dest->boneIndex] = dest->W.Invert();
-
-    for (UINT i = 0; i < src->mNumChildren; i++)
-    {
-        GameObject* child =
-            GameObject::Create(src->mChildren[i]->mName.C_Str());
-
-        //ì„ì‹œ
-        child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
-
-        dest->AddBone(child);
-
-        ReadBoneNode(child, src->mChildren[i]);
-    }
-
-}
-
-//ë…¸ë©€,í…ìŠ¤ì³ì¢Œí‘œ
-void Main::ReadMesh(GameObject* dest, aiNode* src)
-{
-    //ë…¸ë“œê°€ ê°€ì§€ê³ ìˆëŠ” ë©”ì‰¬ ìˆ˜ ë§Œí¼
-    for (UINT i = 0; i < src->mNumMeshes; i++)
-    {
-        UINT index = src->mMeshes[i];
-        aiMesh* srcMesh = scene->mMeshes[index];
-        
-        vector<VertexModel>* VertexList = new vector<VertexModel>();
-        vector<UINT>*        indexList = new vector<UINT>;
-
-        string mtlFile = 
-            scene->mMaterials[srcMesh->mMaterialIndex]->GetName().C_Str();
-        int tok = Modelfile.find_last_of(".");
-        string filePath = Modelfile.substr(0, tok) + "/";
-        mtlFile = filePath + mtlFile + ".mtl";
-        string meshFile = src->mName.C_Str();
-
-        //ì •ì  ê°¯ìˆ˜ë§Œí¼ ëŠ˜ë¦¬ê¸°
-        VertexList->resize(srcMesh->mNumVertices);
-
-        //ì •ì ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µ
-        for (UINT j = 0; j < VertexList->size(); j++)
-        {
-            (*VertexList)[j].position.x = srcMesh->mVertices[j].x;
-            (*VertexList)[j].position.y = srcMesh->mVertices[j].y;
-            (*VertexList)[j].position.z = srcMesh->mVertices[j].z;
-
-            (*VertexList)[j].normal.x = srcMesh->mNormals[j].x;
-            (*VertexList)[j].normal.y = srcMesh->mNormals[j].y;
-            (*VertexList)[j].normal.z = srcMesh->mNormals[j].z;
-
-            (*VertexList)[j].tangent.x = srcMesh->mTangents[j].x;
-            (*VertexList)[j].tangent.y = srcMesh->mTangents[j].y;
-            (*VertexList)[j].tangent.z = srcMesh->mTangents[j].z;
-
-            (*VertexList)[j].uv.x = srcMesh->mTextureCoords[0][j].x; 
-            (*VertexList)[j].uv.y = srcMesh->mTextureCoords[0][j].y; 
-        }
-        UINT IndexCount = srcMesh->mNumFaces;
-        for (UINT j = 0; j < IndexCount; j++)
-        {
-            aiFace& face = srcMesh->mFaces[j];
-            for (UINT k = 0; k < face.mNumIndices; k++)
-            {
-                (*indexList).push_back(face.mIndices[k]);
-            }
-        }
-        if (i == 0)
-        {
-            dest->mesh = make_shared<Mesh>(&(*VertexList)[0], VertexList->size(),
-                &(*indexList)[0], indexList->size(), VertexType::MODEL);
-
-            dest->material = new Material();
-            dest->material->LoadFile(mtlFile);
-
-            {
-                int tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Mesh/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-
-                string filePath = Modelfile.substr(0, tok) + "/";
-                dest->mesh->file = filePath + meshFile + ".mesh";
-                dest->mesh->SaveFile(dest->mesh->file);
-            }
-          
-
-        }
-        else
-        {
-            string Name = srcMesh->mName.C_Str() + string("MeshObject") + to_string(i);
-            GameObject* temp2 = GameObject::Create(Name);
-            dest->AddChild(temp2);
-            temp2->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
-            temp2->mesh = make_shared<Mesh>(&(*VertexList)[0], VertexList->size(),
-                &(*indexList)[0], indexList->size(), VertexType::MODEL);
-            temp2->material = new Material();
-            temp2->material->LoadFile(mtlFile);
-
-            {
-                int tok = Modelfile.find_last_of(".");
-                string checkPath = "../Contents/Mesh/" + Modelfile.substr(0, tok);
-                if (!PathFileExistsA(checkPath.c_str()))
-                {
-                    CreateDirectoryA(checkPath.c_str(), NULL);
-                }
-
-                string filePath = Modelfile.substr(0, tok) + "/";
-                temp2->mesh->file = filePath + Name + ".mesh";
-                temp2->mesh->SaveFile(temp2->mesh->file);
-            }
-        }
-
-    }
-    for (UINT i = 0; i < src->mNumChildren; i++)
-    {
-        ReadMesh(dest->children[src->mChildren[i]->mName.C_Str()],
-            src->mChildren[i]);
-    }
-}
-
 void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
 {
-    //ë…¸ë“œê°€ ê°€ì§€ê³ ìˆëŠ” ë©”ì‰¬ ìˆ˜ ë§Œí¼
+    //³ëµå°¡ °¡Áö°íÀÖ´Â ¸Ş½¬ ¼ö ¸¸Å­
     for (UINT i = 0; i < src->mNumMeshes; i++)
     {
         UINT index = src->mMeshes[i];
@@ -668,13 +314,13 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
         mtlFile = filePath + mtlFile + ".mtl";
         string meshFile = src->mName.C_Str();
 
-        //ì •ì  ê°¯ìˆ˜ë§Œí¼ ëŠ˜ë¦¬ê¸°
+        //Á¤Á¡ °¹¼ö¸¸Å­ ´Ã¸®±â
         VertexList->resize(srcMesh->mNumVertices);
         VertexWeights.resize(srcMesh->mNumVertices);
 
         ReadBoneData(srcMesh, VertexWeights);
 
-        //ì •ì ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µ
+        //Á¤Á¡°¹¼ö¸¸Å­ ¹İº¹
         for (UINT j = 0; j < VertexList->size(); j++)
         {
             (*VertexList)[j].position.x = srcMesh->mVertices[j].x;
@@ -685,14 +331,20 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
             (*VertexList)[j].normal.y = srcMesh->mNormals[j].y;
             (*VertexList)[j].normal.z = srcMesh->mNormals[j].z;
 
-            (*VertexList)[j].tangent.x = srcMesh->mTangents[j].x;
-            (*VertexList)[j].tangent.y = srcMesh->mTangents[j].y;
-            (*VertexList)[j].tangent.z = srcMesh->mTangents[j].z;
+            if (srcMesh->mTangents)
+            {
+                (*VertexList)[j].tangent.x = srcMesh->mTangents[j].x;
+                (*VertexList)[j].tangent.y = srcMesh->mTangents[j].y;
+                (*VertexList)[j].tangent.z = srcMesh->mTangents[j].z;
+            }
 
-            (*VertexList)[j].uv.x = srcMesh->mTextureCoords[0][j].x;
-            (*VertexList)[j].uv.y = srcMesh->mTextureCoords[0][j].y;
+            if (srcMesh->mTextureCoords[0])
+            {
+                (*VertexList)[j].uv.x = srcMesh->mTextureCoords[0][j].x;
+                (*VertexList)[j].uv.y = srcMesh->mTextureCoords[0][j].y;
+            }
 
-            //ë³¸ë°ì´í„°ê°€ ìˆì„ë•Œ
+            //º»µ¥ÀÌÅÍ°¡ ÀÖÀ»¶§
             if (!VertexWeights.empty())
             {
                 VertexWeights[j].Normalize();
@@ -764,7 +416,7 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
             }
         }
 
-      
+
     }
     for (UINT i = 0; i < src->mNumChildren; i++)
     {
@@ -773,12 +425,39 @@ void Main::ReadSkinMesh(GameObject* dest, aiNode* src)
     }
 }
 
+void Main::ReadBoneNode(GameObject* dest, aiNode* src)
+{
+    Matrix tempMat = ToMatrix(src->mTransformation);
+    Vector3 s, r, t; Quaternion q;
+    tempMat.Decompose(s, q, t);
+    r = Utility::QuaternionToYawPtichRoll(q);
+    dest->scale = s; dest->rotation = r; dest->SetLocalPos(t);
+
+    temp->Update();
+    //³ëµå°¡ 0.0.0¿¡¼­ ¾ó¸¸Å­ ¸Ö¾îÁ³´ÂÁö ÀúÀå
+    dest->root->skeleton->bonesOffset[dest->boneIndex] = dest->W.Invert();
+
+    for (UINT i = 0; i < src->mNumChildren; i++)
+    {
+        GameObject* child =
+            GameObject::Create(src->mChildren[i]->mName.C_Str());
+
+        //ÀÓ½Ã
+        //child->mesh = RESOURCE->meshes.Load("2.Sphere.mesh");
+        child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
+
+        dest->AddBone(child);
+
+        ReadBoneNode(child, src->mChildren[i]);
+    }
+}
+
 void Main::ReadBoneData(aiMesh* mesh, vector<class VertexWeights>& vertexWeights)
 {
-    //ë©”ì‰¬ê°€ ê°€ì§€ê³  ìˆëŠ” ë³¸ ê°œìˆ˜ ë§Œí¼
+    //¸Ş½¬°¡ °¡Áö°í ÀÖ´Â º» °³¼ö ¸¸Å­
     for (UINT i = 0; i < mesh->mNumBones; i++)
     {
-        //í˜„ì¬ë³¸ì´ í•˜ì´ì–´ë¼ì´í‚¤ì—ì„œ ëª‡ë²ˆì§¸ ì¸ë±ìŠ¤ì¸ê°€?
+        //ÇöÀçº»ÀÌ ÇÏÀÌ¾î¶óÀÌÅ°¿¡¼­ ¸î¹øÂ° ÀÎµ¦½ºÀÎ°¡?
         string boneName = mesh->mBones[i]->mName.C_Str();
         int boneIndex = temp->Find(boneName)->boneIndex;
         for (UINT j = 0; j < mesh->mBones[i]->mNumWeights; j++)
@@ -786,6 +465,326 @@ void Main::ReadBoneData(aiMesh* mesh, vector<class VertexWeights>& vertexWeights
             UINT vertexID = mesh->mBones[i]->mWeights[j].mVertexId;
             vertexWeights[vertexID].AddData(boneIndex, mesh->mBones[i]->mWeights[j].mWeight);
         }
+    }
+}
+
+void Main::ReadMesh(GameObject* dest, aiNode* src)
+{
+    //³ëµå°¡ ¸Ş½Ã¸¦ °¡Áö°íÀÖ´Â ¼ö¸¸Å­ ¹İº¹
+    for (UINT i = 0; i < src->mNumMeshes; i++)
+    {
+        //¾À¿¡ ¸î¹ø ¸Ş½ÃÀÎÁö 
+        UINT index = src->mMeshes[i];
+        //¾À¿¡¼­ ÀÎµ¦½º¸¦ °¡Áö°í Á¢±Ù
+        aiMesh* srcMesh = scene->mMeshes[index];
+
+        vector<VertexModel>* VertexList = new vector<VertexModel>();
+        vector<UINT>* indexList = new vector<UINT>;
+
+        string mtlFile =
+        scene->mMaterials[srcMesh->mMaterialIndex]->GetName().C_Str();
+        int tok = Modelfile.find_last_of(".");
+        string filePath = Modelfile.substr(0, tok) + "/";
+        mtlFile = filePath + mtlFile + ".mtl";
+        string meshFile = src->mName.C_Str();
+
+        //Á¤Á¡ °¹¼ö¸¸Å­ ´Ã¸®±â
+        VertexList->resize(srcMesh->mNumVertices);
+
+        //Á¤Á¡°¹¼ö¸¸Å­ ¹İº¹
+        for (UINT j = 0; j < VertexList->size(); j++)
+        {
+            (*VertexList)[j].position.x = srcMesh->mVertices[j].x;
+            (*VertexList)[j].position.y = srcMesh->mVertices[j].y;
+            (*VertexList)[j].position.z = srcMesh->mVertices[j].z;
+
+            (*VertexList)[j].normal.x = srcMesh->mNormals[j].x;
+            (*VertexList)[j].normal.y = srcMesh->mNormals[j].y;
+            (*VertexList)[j].normal.z = srcMesh->mNormals[j].z;
+
+            if (srcMesh->mTangents)
+            {
+                (*VertexList)[j].tangent.x = srcMesh->mTangents[j].x;
+                (*VertexList)[j].tangent.y = srcMesh->mTangents[j].y;
+                (*VertexList)[j].tangent.z = srcMesh->mTangents[j].z;
+            }
+          
+            if (srcMesh->mTextureCoords[0])
+            {
+                (*VertexList)[j].uv.x = srcMesh->mTextureCoords[0][j].x;
+                (*VertexList)[j].uv.y = srcMesh->mTextureCoords[0][j].y;
+            }
+           
+        }
+
+        UINT IndexCount = srcMesh->mNumFaces;
+        for (UINT j = 0; j < IndexCount; j++)
+        {
+            aiFace& face = srcMesh->mFaces[j];
+            for (UINT k = 0; k < face.mNumIndices; k++)
+            {
+                (*indexList).push_back(face.mIndices[k]);
+            }
+        }
+
+
+        if (i == 0)
+        {
+            dest->mesh = make_shared<Mesh>(&(*VertexList)[0], VertexList->size(),
+                &(*indexList)[0], indexList->size(), VertexType::MODEL);
+
+            dest->material = new Material();
+            dest->material->LoadFile(mtlFile);
+
+            {
+                int tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Mesh/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+
+                string filePath = Modelfile.substr(0, tok) + "/";
+                dest->mesh->file = filePath + meshFile + ".mesh";
+                dest->mesh->SaveFile(dest->mesh->file);
+            }
+
+        }
+        else
+        {
+            string Name = srcMesh->mName.C_Str() + string("MeshObject") + to_string(i);
+            GameObject* temp2 = GameObject::Create(Name);
+            dest->AddChild(temp2);
+            temp2->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
+            temp2->mesh = make_shared<Mesh>(&(*VertexList)[0], VertexList->size(),
+                &(*indexList)[0], indexList->size(), VertexType::MODEL);
+            temp2->material = new Material();
+            temp2->material->LoadFile(mtlFile);
+
+            {
+                int tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Mesh/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+
+                string filePath = Modelfile.substr(0, tok) + "/";
+                temp2->mesh->file = filePath + Name + ".mesh";
+                temp2->mesh->SaveFile(temp2->mesh->file);
+            }
+
+        }
+
+
+    }
+    for (UINT i = 0; i < src->mNumChildren; i++)
+    {
+        GameObject* child =
+            GameObject::Create(src->mChildren[i]->mName.C_Str());
+        child->shader = RESOURCE->shaders.Load("4.Cube.hlsl");
+        dest->AddChild(child);
+
+        ReadMesh(dest->children[src->mChildren[i]->mName.C_Str()],
+            src->mChildren[i]);
+    }
+
+
+
+
+}
+
+void Main::ReadMaterial()
+{
+    for (UINT i = 0; i < scene->mNumMaterials; i++)
+    {
+        aiMaterial* srcMtl = scene->mMaterials[i];
+
+        Material* destMtl = new Material();
+        //ÀÌ¸§ -Å°°ª
+        destMtl->file = srcMtl->GetName().C_Str();
+
+        aiColor3D ambient;
+        srcMtl->Get(AI_MATKEY_COLOR_AMBIENT, ambient);
+        destMtl->ambient.x = ambient.r;
+        destMtl->ambient.y = ambient.g;
+        destMtl->ambient.z = ambient.b;
+
+
+        aiColor3D diffuse;
+        srcMtl->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+        destMtl->diffuse.x = diffuse.r;
+        destMtl->diffuse.y = diffuse.g;
+        destMtl->diffuse.z = diffuse.b;
+
+
+        aiColor3D specular;
+        srcMtl->Get(AI_MATKEY_COLOR_SPECULAR, specular);
+        destMtl->specular.x = specular.r;
+        destMtl->specular.y = specular.g;
+        destMtl->specular.z = specular.b;
+
+
+        aiColor3D emissive;
+        srcMtl->Get(AI_MATKEY_COLOR_EMISSIVE, emissive);
+        destMtl->emissive.x = emissive.r;
+        destMtl->emissive.y = emissive.g;
+        destMtl->emissive.z = emissive.b;
+
+        //Shininess
+        srcMtl->Get(AI_MATKEY_SHININESS, destMtl->shininess);
+        //opacity
+        srcMtl->Get(AI_MATKEY_OPACITY, destMtl->opacity);
+
+        //Normal
+        {
+            aiString aifile;
+            string TextureFile;
+            aiReturn texFound;
+            texFound = srcMtl->GetTexture(aiTextureType_NORMALS, 0, &aifile);
+            TextureFile = aifile.C_Str();
+            size_t index = TextureFile.find_last_of('/');
+            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
+
+
+
+            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            if (texFound == AI_SUCCESS && Modelfile != "")
+            {
+                destMtl->ambient.w = 1.0f;
+                destMtl->normalMap = make_shared<Texture>();
+
+                size_t tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+                string orgin = "../Assets/" + TextureFile;
+                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
+                bool isCheck = true;
+                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
+
+                destMtl->normalMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
+
+            }
+        }
+
+        //Diffuse
+        {
+            aiString aifile;
+            string TextureFile;
+            aiReturn texFound;
+            texFound = srcMtl->GetTexture(aiTextureType_DIFFUSE, 0, &aifile);
+            TextureFile = aifile.C_Str();
+            size_t index = TextureFile.find_last_of('/');
+            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
+
+            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            if (texFound == AI_SUCCESS && Modelfile != "")
+            {
+                destMtl->diffuse.w = 1.0f;
+                destMtl->diffuseMap = make_shared<Texture>();
+
+                size_t tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+                string orgin = "../Assets/" + TextureFile;
+                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
+                bool isCheck = true;
+                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
+
+                destMtl->diffuseMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
+
+            }
+        }
+
+        //specular
+        {
+            aiString aifile;
+            string TextureFile;
+            aiReturn texFound;
+            texFound = srcMtl->GetTexture(aiTextureType_SPECULAR, 0, &aifile);
+            TextureFile = aifile.C_Str();
+            size_t index = TextureFile.find_last_of('/');
+            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
+
+            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            if (texFound == AI_SUCCESS && Modelfile != "")
+            {
+                destMtl->specular.w = 1.0f;
+                destMtl->specularMap = make_shared<Texture>();
+
+                size_t tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+                string orgin = "../Assets/" + TextureFile;
+                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
+                bool isCheck = true;
+                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
+
+                destMtl->specularMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
+
+            }
+        }
+
+        //emissive
+        {
+            aiString aifile;
+            string TextureFile;
+            aiReturn texFound;
+            texFound = srcMtl->GetTexture(aiTextureType_EMISSIVE, 0, &aifile);
+            TextureFile = aifile.C_Str();
+            size_t index = TextureFile.find_last_of('/');
+            TextureFile = TextureFile.substr(index + 1, TextureFile.length());
+
+            //ÅØ½ºÃÄ°¡ ÀÖ´Ù.
+            if (texFound == AI_SUCCESS && Modelfile != "")
+            {
+                destMtl->emissive.w = 1.0f;
+                destMtl->emissiveMap = make_shared<Texture>();
+
+                size_t tok = Modelfile.find_last_of(".");
+                string checkPath = "../Contents/Texture/" + Modelfile.substr(0, tok);
+                if (!PathFileExistsA(checkPath.c_str()))
+                {
+                    CreateDirectoryA(checkPath.c_str(), NULL);
+                }
+                string orgin = "../Assets/" + TextureFile;
+                string copy = "../Contents/Texture/" + Modelfile.substr(0, tok) + "/" + TextureFile;
+                bool isCheck = true;
+                CopyFileA(orgin.c_str(), copy.c_str(), isCheck);
+
+                destMtl->emissiveMap->LoadFile(Modelfile.substr(0, tok) + "/" + TextureFile);
+
+            }
+        }
+
+        size_t tok = Modelfile.find_last_of(".");
+        string checkPath = "../Contents/Material/" + Modelfile.substr(0, tok);
+        if (!PathFileExistsA(checkPath.c_str()))
+        {
+            CreateDirectoryA(checkPath.c_str(), NULL);
+        }
+
+        string filePath = Modelfile.substr(0, tok) + "/";
+
+        destMtl->file = destMtl->file + ".mtl";
+        string checkFile = checkPath + "/" + destMtl->file;
+        destMtl->file = filePath + destMtl->file ;
+       
+        if (!PathFileExistsA(checkFile.c_str()))
+        {
+            destMtl->SaveFile(destMtl->file);
+        }
+       
+
     }
 }
 
@@ -812,34 +811,34 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, in
 
 Vector3 Interpolated::CalcInterpolatedScaling(AnimNode* iter, float time, int Duration)
 {
-    //ë¹„ì–´ìˆìœ¼ë©´ 1,1,1ë°˜í™˜
+    //ºñ¾îÀÖÀ¸¸é 1,1,1¹İÈ¯
     if (iter->scale.empty())
         return Vector3(1.0f, 1.0f, 1.0f);
-    //í•œê°œë§Œ ìˆëŠ”ë†ˆì€ ì²«ë²ˆì§¸ ê°’ ë°˜í™˜
+    //ÇÑ°³¸¸ ÀÖ´Â³ğÀº Ã¹¹øÂ° °ª ¹İÈ¯
     if (iter->scale.size() == 1)
         return iter->scale.front().scale;
-    //ë§ˆì§€ë§‰ ë†ˆì€ ë§ˆì§€ë§‰ê°’ ë°˜í™˜
+    //¸¶Áö¸· ³ğÀº ¸¶Áö¸·°ª ¹İÈ¯
     if (time == Duration - 1)
     {
         return iter->scale.back().scale;
     }
-    //ë³´ê°„ ì‹œì‘
+    //º¸°£ ½ÃÀÛ
     int scaling_index = FindScale(iter, time);
-    //-1 ì¸ë±ìŠ¤ê°€ ì—†ìœ¼ë¯€ë¡œ ë§ˆì§€ë§‰ ê°’ìœ¼ë¡œ ë°˜í™˜
+    //-1 ÀÎµ¦½º°¡ ¾øÀ¸¹Ç·Î ¸¶Áö¸· °ªÀ¸·Î ¹İÈ¯
     if (scaling_index == -1)
     {
         return iter->scale.back().scale;
     }
-    //ë³´ê°„ ë
+    //º¸°£ ³¡
     UINT next_scaling_index = scaling_index + 1;
     assert(next_scaling_index < iter->scale.size());
 
-    //ì°¨ì´ ë‚˜ëŠ” ì‹œê°„ê°’
+    //Â÷ÀÌ ³ª´Â ½Ã°£°ª
     float delta_time = (float)(iter->scale[next_scaling_index].time
         - iter->scale[scaling_index].time);
-    //ë³´ê°„ê°’
+    //º¸°£°ª
     float factor = (time - (float)(iter->scale[scaling_index].time)) / delta_time;
-    //ì–˜ë„ í•˜ë‚˜ë§Œ ìˆëŠ”ì• 
+    //¾êµµ ÇÏ³ª¸¸ ÀÖ´Â¾Ö
     if (factor < 0.0f)
     {
         return iter->scale.front().scale;
@@ -933,7 +932,7 @@ int Interpolated::FindScale(AnimNode* iter, float time)
     //vector<AnimScale> scale_frames = iter->second->scale;
 
     if (iter->scale.empty())
-        return -1;//-1 ì„ ë°˜í™˜í•˜ë©´ ì˜¤ë¥˜ë¡œ í„°ì§€ê²Œ ë¨
+        return -1;//-1 À» ¹İÈ¯ÇÏ¸é ¿À·ù·Î ÅÍÁö°Ô µÊ
 
     for (UINT i = 0; i < iter->scale.size() - 1; i++)
     {
@@ -941,7 +940,7 @@ int Interpolated::FindScale(AnimNode* iter, float time)
             return i;
     }
 
-    return -1;//-1 ì„ ë°˜í™˜í•˜ë©´ ì˜¤ë¥˜ë¡œ í„°ì§€ê²Œ ë¨
+    return -1;//-1 À» ¹İÈ¯ÇÏ¸é ¿À·ù·Î ÅÍÁö°Ô µÊ
 }
 int Interpolated::FindRot(AnimNode* iter, float time)
 {

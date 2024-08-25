@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 class Main : public Scene
 {
@@ -8,28 +8,29 @@ private:
 	Grid*				grid;
 
 	Actor*				temp;
+
 	string				Modelfile;
 	string				Animfile;
-	//ì„í¬íŠ¸í•´ì„œ ê°€ì ¸ì˜¨ ë°ì´í„°
-	const aiScene*		scene;
-	Assimp::Importer	importer;
+	const aiScene*		scene;		//¸ğµ¨ÀÇ ¸ğµçµ¥ÀÌÅÍ Á¢±Ù °¡´É
+	Assimp::Importer	importer;	//ÆÄÀÏÀ» ÀĞ¾î¿Ã°´Ã¼
 public:
 	Main();
 	~Main();
 	virtual void Init() override;
-	virtual void Release() override; //í•´ì œ
+	virtual void Release() override; //ÇØÁ¦
 	virtual void Update() override;
-	virtual void LateUpdate() override;//ê°±ì‹ 
+	virtual void LateUpdate() override;//°»½Å
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
-	
-	void ReadMaterial();
-	void ReadNode(GameObject* dest, aiNode* src);
-	void ReadBoneNode(GameObject* dest, aiNode* src);
 
+	//					gameobject <-data
 	void ReadMesh(GameObject* dest, aiNode* src);
+
+	void ReadMaterial();
+
 	void ReadSkinMesh(GameObject* dest, aiNode* src);
+	void ReadBoneNode(GameObject* dest, aiNode* src);
 	void ReadBoneData(aiMesh* mesh, vector<class VertexWeights>& vertexWeights);
 
 	Matrix ToMatrix(aiMatrix4x4& value)
@@ -42,9 +43,8 @@ public:
 			value.a4, value.b4, value.c4, value.d4
 		);
 	};
-
-
 };
+
 
 
 
@@ -53,6 +53,8 @@ struct VertexWeights
 {
 	UINT	boneIdx[MAX_WEIGHTS];
 	float	boneWeights[MAX_WEIGHTS];
+
+
 	VertexWeights()
 	{
 		ZeroMemory(boneIdx, sizeof(UINT) * MAX_WEIGHTS);
@@ -112,7 +114,7 @@ struct AnimRotation
 struct AnimNode
 {
 	string					name;
-	//ê° ë²¡í„° ì‚¬ì´ì¦ˆê°€ ë‹¤ë¥¼ìˆ˜ìˆë‹¤.
+	//°¢ º¤ÅÍ »çÀÌÁî°¡ ´Ù¸¦¼öÀÖ´Ù.
 	vector<AnimPosition>	position;
 	vector<AnimScale>		scale;
 	vector<AnimRotation>	rotation;
