@@ -1,8 +1,8 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Input::Input()
 {
-    //½ÃÀÛÁÖ¼Ò·ÎºÎÅÍ ¾îµğ±îÁö ÀüºÎ 0À¸·Î ÃÊ±âÈ­
+    //ì‹œì‘ì£¼ì†Œë¡œë¶€í„° ì–´ë””ê¹Œì§€ ì „ë¶€ 0ìœ¼ë¡œ ì´ˆê¸°í™”
     ZeroMemory(keyState, sizeof(keyState));
     ZeroMemory(keyOldState, sizeof(keyOldState));
     ZeroMemory(keyMap, sizeof(keyMap));
@@ -62,10 +62,10 @@ void Input::Update()
 
 
 
-    //¸Ş¸ğ¸®º¹»ç keyOldState = keyState 
+    //ë©”ëª¨ë¦¬ë³µì‚¬ keyOldState = keyState 
     memcpy(keyOldState, keyState, sizeof(keyOldState));
 
-    //±âÁ¸ÀÇ ¹è¿­°ª ÃÊ±âÈ­
+    //ê¸°ì¡´ì˜ ë°°ì—´ê°’ ì´ˆê¸°í™”
     ZeroMemory(keyState, sizeof(keyState));
 
 
@@ -73,25 +73,25 @@ void Input::Update()
     ZeroMemory(keyMap, sizeof(keyMap));
 
     //BOOL a;
-    //ÇöÀç È£Ãâ»óÅÂ¿¡¼­ÀÇ Å°ÀÔ·Â°ªÀ» °¡Á®¿À´Â ÇÔ¼ö
+    //í˜„ì¬ í˜¸ì¶œìƒíƒœì—ì„œì˜ í‚¤ì…ë ¥ê°’ì„ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
     if (GetKeyboardState(keyState))
     {
         for (UINT i = 0; i < 256; i++)
         {
             byte key = keyState[i] & 0x80;
-            //»ïÇ×¿¬»êÀÚ   (bool)? 1{} 0{}
-            //Å°¸¦ ´©¸¥»óÅÂ¸é 1, ¾Æ´Ï¸é 0À¸·Î ´ëÀÔ
+            //ì‚¼í•­ì—°ì‚°ì   (bool)? 1{} 0{}
+            //í‚¤ë¥¼ ëˆ„ë¥¸ìƒíƒœë©´ 1, ì•„ë‹ˆë©´ 0ìœ¼ë¡œ ëŒ€ì…
             keyState[i] = key ? 1 : 0;
 
             int oldState = keyOldState[i];
             int state = keyState[i];
 
             if (oldState == 0 && state == 1)
-                keyMap[i] = KEY_INPUT_STATUS_DOWN; //ÀÌÀü 0, ÇöÀç 1 - KeyDown
+                keyMap[i] = KEY_INPUT_STATUS_DOWN; //ì´ì „ 0, í˜„ì¬ 1 - KeyDown
             else if (oldState == 1 && state == 0)
-                keyMap[i] = KEY_INPUT_STATUS_UP; //ÀÌÀü 1, ÇöÀç 0 - KeyUp
+                keyMap[i] = KEY_INPUT_STATUS_UP; //ì´ì „ 1, í˜„ì¬ 0 - KeyUp
             else if (oldState == 1 && state == 1)
-                keyMap[i] = KEY_INPUT_STATUS_PRESS; //ÀÌÀü 1, ÇöÀç 1 - KeyPress
+                keyMap[i] = KEY_INPUT_STATUS_PRESS; //ì´ì „ 1, í˜„ì¬ 1 - KeyPress
             else
                 keyMap[i] = KEY_INPUT_STATUS_NONE;
         }

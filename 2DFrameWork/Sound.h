@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 class Sound : public Singleton<Sound>
 {
 	struct SoundNode
 	{
-		FMOD::Sound * sound;        //Ãâ·ÂÇÒ »ç¿îµå µ¥ÀÌÅÍ
-		FMOD::Channel * channel;    //Ãâ·ÂÇØÁÙ Ã¤³Î
+		FMOD::Sound * sound;        //ì¶œë ¥í•  ì‚¬ìš´ë“œ ë°ì´í„°
+		FMOD::Channel * channel;    //ì¶œë ¥í•´ì¤„ ì±„ë„
         float volume = 1.0f;
     };
 
@@ -15,17 +15,17 @@ public:
 
     Sound();
     ~Sound();
-    //Àü¿ª¿¡¼­ »ç¿îµå Ãß°¡ 
+    //ì „ì—­ì—ì„œ ì‚¬ìš´ë“œ ì¶”ê°€ 
     bool AddSound(string File, string Key, bool loop = false);
-    //Àü¿ª¿¡¼­ »ç¿îµå »èÁ¦
+    //ì „ì—­ì—ì„œ ì‚¬ìš´ë“œ ì‚­ì œ
     bool DeleteSound(string Key);
 
-    //±×¸®°í key¸¦ ¸Å°³º¯¼ö·Î µÎ°í ¸ğµÎ Á¦¾î
+    //ê·¸ë¦¬ê³  keyë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë‘ê³  ëª¨ë‘ ì œì–´
     void Play(string Key);
     void Stop(string Key);
-    //ÀÏ½ÃÁ¤Áö
+    //ì¼ì‹œì •ì§€
     void Pause(string Key);
-    //ÀÏ½ÃÁ¤Áö ÇØÁ¦
+    //ì¼ì‹œì •ì§€ í•´ì œ
     void Resume(string Key);
 
     void SetVolume(string Key, float scale);

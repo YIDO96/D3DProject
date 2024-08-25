@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 UI* UI::Create(string name)
 {
@@ -18,7 +18,7 @@ void UI::Update()
 	if (left < ndcMouse.x and ndcMouse.x < right
 		and bottom < ndcMouse.y and ndcMouse.y < top)
 	{
-		//ÇÔ¼öÆ÷ÀÎÅÍ°¡ ÇÒ´ç µÇ¾ú´Ù¸é ½ÇÇà
+		//í•¨ìˆ˜í¬ì¸í„°ê°€ í• ë‹¹ ë˜ì—ˆë‹¤ë©´ ì‹¤í–‰
 		if (mouseOver) mouseOver();
 
 		if (INPUT->KeyDown(VK_LBUTTON))

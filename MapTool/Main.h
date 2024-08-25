@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 //struct Brush
 //{
@@ -58,9 +58,9 @@ public:
 	~Main();
 
 	virtual void Init() override;
-	virtual void Release() override; //ÇØÁ¦
+	virtual void Release() override; //í•´ì œ
 	virtual void Update() override;
-	virtual void LateUpdate() override;//°»½Å
+	virtual void LateUpdate() override;//ê°±ì‹ 
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void ResizeScreen() override;

@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 //#include "Sky.h"
 
 Sky* Sky::Create(string name)
@@ -16,20 +16,20 @@ Sky* Sky::Create(string name)
 
 void Sky::Render(shared_ptr<Shader> pShader)
 {
-	//±íÀÌ ²ô±â
+	//ê¹Šì´ ë„ê¸°
 	DEPTH->Set(false);
-	//ºí·»µå ÄÑ±â
+	//ë¸”ë Œë“œ ì¼œê¸°
 	BLEND->Set(true);
-	//¾Õ¸é Ãß¸®±â
+	//ì•žë©´ ì¶”ë¦¬ê¸°
 	RASTER->Set(D3D11_CULL_FRONT);
 	if(texCube)
 	texCube->Set(4);
 	Actor::Render(pShader);
-	//µÞ¸é Ãß¸®±â
+	//ë’·ë©´ ì¶”ë¦¬ê¸°
 	RASTER->Set(D3D11_CULL_BACK);
-	//ºí·»µå²ô±â
+	//ë¸”ë Œë“œë„ê¸°
 	BLEND->Set(false);
-	//±íÀÌ ÄÑ±â
+	//ê¹Šì´ ì¼œê¸°
 	DEPTH->Set(true);
 }
 

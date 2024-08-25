@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 void Transform::SaveTransform(Xml::XMLElement* This, Xml::XMLDocument* doc)
 {
@@ -478,12 +478,12 @@ void GameObject::LoadObject(Xml::XMLElement* This)
 
 void GameObject::CopyChild(GameObject* src)
 {
-	//º¹»ç´ë»óÀÇ ÀÚ½Äµé ¹Ýº¹
+	//ë³µì‚¬ëŒ€ìƒì˜ ìžì‹ë“¤ ë°˜ë³µ
 	for (auto it = src->children.begin(); it != src->children.end(); it++)
 	{
-		//º¹»ç ¹ÞÀ»¾Ö
+		//ë³µì‚¬ ë°›ì„ì• 
 		GameObject* Child = nullptr;
-		//º¹»ç ´ë»ó
+		//ë³µì‚¬ ëŒ€ìƒ
 		GameObject* srcChild = it->second;
 
 		if (it->second->type == ObType::GameObject)
@@ -500,13 +500,13 @@ void GameObject::CopyChild(GameObject* src)
 			Camera* src = (Camera*)srcChild;
 			Child = new Camera(*src);
 		}
-		//ÁÖ¼Ò¿¬°á
+		//ì£¼ì†Œì—°ê²°
 		Child->root = this->root;
 		Child->parent = this;
 		children[Child->name] = Child;
-		//Å×ÀÌºí¿¬°á
+		//í…Œì´ë¸”ì—°ê²°
 		this->AddChild(Child);
-		//ÀÚ½ÄÀÇ Àç±ÍÈ£Ãâ
+		//ìžì‹ì˜ ìž¬ê·€í˜¸ì¶œ
 		Child->CopyChild(srcChild);
 	}
 
@@ -554,7 +554,7 @@ void Actor::LoadFile(string file)
 		doc->LoadFile(path.c_str());
 	if (result != Xml::XML_SUCCESS) return;
 
-	//ÇÏÀ§³ëµå »èÁ¦
+	//í•˜ìœ„ë…¸ë“œ ì‚­ì œ
 	ReleaseMember();
 
 	Xml::XMLElement* ob;

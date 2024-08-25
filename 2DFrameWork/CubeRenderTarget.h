@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class CubeRenderTarget
 {
 private:
@@ -24,15 +24,15 @@ protected:
 
     ID3D11SamplerState* sampler;
 
-    //Ã¢»çÀÌÁî Á¶Àı
+    //ì°½ì‚¬ì´ì¦ˆ ì¡°ì ˆ
     void CreateBackBuffer(float width, float height);
     void DeleteBackBuffer();
 
 public:
     Viewport    viewport;
-    Vector3     position;       //360µµ Ä«¸Ş¶ó Áß½ÉÁ¡ 
-    float		nearZ , farZ;   //½Ã¾ß°ø°£ ³¡À» ¾îµğ±îÁö Á¤ÇÒÁö
-    float       shadowBias;     //±×¸²ÀÚ ¿ÀÂ÷¹üÀ§
+    Vector3     position;       //360ë„ ì¹´ë©”ë¼ ì¤‘ì‹¬ì  
+    float		nearZ , farZ;   //ì‹œì•¼ê³µê°„ ëì„ ì–´ë””ê¹Œì§€ ì •í• ì§€
+    float       shadowBias;     //ê·¸ë¦¼ì ì˜¤ì°¨ë²”ìœ„
 
     CubeRenderTarget(UINT width = 256);
     ~CubeRenderTarget();

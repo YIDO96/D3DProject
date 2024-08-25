@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 class PostEffect
 {
 	struct PSP
 	{
 		int filter = 0;
 		Vector3 color;
-		Vector2 screen; //ÁÂÇ¥
+		Vector2 screen; //ì¢Œí‘œ
 		float radius = 100;
 		int count = 1;
 
@@ -16,8 +16,8 @@ class PostEffect
 	};
 	ID3D11Buffer* PEBuffer;
 private:
-    RenderTarget*   target; //±×·ÁÁÙ ÅØ½ºÃ³
-    UI*             ui;     //¸ÅÇÎÇÒ ¿ÀºêÁ§Æ®
+    RenderTarget*   target; //ê·¸ë ¤ì¤„ í…ìŠ¤ì²˜
+    UI*             ui;     //ë§¤í•‘í•  ì˜¤ë¸Œì íŠ¸
 
 public:
 	PSP psp;

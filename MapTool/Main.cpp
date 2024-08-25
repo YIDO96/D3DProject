@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Main.h"
 
 Main::Main()
@@ -6,7 +6,7 @@ Main::Main()
 	D3D11_BUFFER_DESC desc = { 0 };
 	desc.ByteWidth = sizeof(Brush);
 	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//»ó¼ö¹öÆÛ
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ìƒìˆ˜ë²„í¼
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	desc.MiscFlags = 0;
 	desc.StructureByteStride = 0;
@@ -14,7 +14,7 @@ Main::Main()
 	assert(SUCCEEDED(hr));
 	D3D->GetDC()->PSSetConstantBuffers(10, 1, &brushBuffer);
 
-	//Åõ¸í ÀÌ¹ÌÁöÃâ·Â
+	//íˆ¬ëª… ì´ë¯¸ì§€ì¶œë ¥
 }
 
 Main::~Main()

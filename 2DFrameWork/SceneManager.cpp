@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 #include "SceneManager.h"
 
 SceneManager::~SceneManager()
@@ -51,9 +51,9 @@ Scene * SceneManager::ChangeScene(string key, float changingTime)
         if (changingTime <= 0.0f)
         {
             isChanging = true;
-            //¾À ºÒ·¯¿Ã ¶§ 
+            //ì”¬ ë¶ˆëŸ¬ì˜¬ ë•Œ 
             SafeRelease(currentScene);
-            //¾À ¹Ù²ð ¶§
+            //ì”¬ ë°”ë€” ë•Œ
             nextScene->Init();
         } 
     }

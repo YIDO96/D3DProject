@@ -1,12 +1,12 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Timer::Timer()
 {
-    //ÇöÀç ½Ã°£ ÃøÁ¤
+    //í˜„ì¬ ì‹œê°„ ì¸¡ì •
     lastTime = chrono::steady_clock::now();
-    //Å¸ÀÌ¸Ó »ı¼º½Ã¿£ °æ°ú½Ã°£À» ¾Ë¼ö¾ø´Ù.
+    //íƒ€ì´ë¨¸ ìƒì„±ì‹œì—” ê²½ê³¼ì‹œê°„ì„ ì•Œìˆ˜ì—†ë‹¤.
     deltaTime = 0.0f;
-    //Ã³À½ ½ÇÇà½Ã°£Àº 0
+    //ì²˜ìŒ ì‹¤í–‰ì‹œê°„ì€ 0
     worldTime = 0.0f;
     framePerSecond = 0;
     framePerSecondCount = 0;
@@ -27,31 +27,31 @@ bool Timer::GetTick(float& time, float interval)
 void Timer::Chronometry(UINT lock)
 {
     currentTime = chrono::steady_clock::now();
-    //Áö³­½Ã°£ - ÇöÀç½Ã°£°ªÀ» ³ª³ë ÃÊ´ÜÀ§·Î ¹Ş±â
+    //ì§€ë‚œì‹œê°„ - í˜„ì¬ì‹œê°„ê°’ì„ ë‚˜ë…¸ ì´ˆë‹¨ìœ„ë¡œ ë°›ê¸°
     chrono::duration<double> Delta = currentTime - lastTime;
-    //        ÃÊ´ÜÀ§·Î º¯°æÇÏ¿© °ª¹Ş±â
+    //        ì´ˆë‹¨ìœ„ë¡œ ë³€ê²½í•˜ì—¬ ê°’ë°›ê¸°
     deltaTime = (float)Delta.count();
 
-    //µ¨Å¸°¡ 1/60º¸´Ù ÀÛ´Ù¸é
+    //ë¸íƒ€ê°€ 1/60ë³´ë‹¤ ì‘ë‹¤ë©´
     while (deltaTime < (1.0f / lock))
     {
-        //ÇöÀç½Ã°£À» ´Ù½ÃÃøÁ¤
+        //í˜„ì¬ì‹œê°„ì„ ë‹¤ì‹œì¸¡ì •
         currentTime = chrono::steady_clock::now();
-        //µ¨Å¸¸¦ ´Ù½Ã°è»ê
+        //ë¸íƒ€ë¥¼ ë‹¤ì‹œê³„ì‚°
         Delta = currentTime - lastTime;
         deltaTime = (float)Delta.count();
     }
 
-    //¸¶Áö¸· ½Ã°£À» ±â·Ï
+    //ë§ˆì§€ë§‰ ì‹œê°„ì„ ê¸°ë¡
     lastTime = currentTime;
-    //ÀüÃ¼ ½Ã°£ °æ°ú·®À» ¿¬»ê
+    //ì „ì²´ ì‹œê°„ ê²½ê³¼ëŸ‰ì„ ì—°ì‚°
     worldTime += deltaTime;
 
-    //1ÃÊ¸¦ Àâ¾ÆÁÖ´Â º¯¼ö
+    //1ì´ˆë¥¼ ì¡ì•„ì£¼ëŠ” ë³€ìˆ˜
     framePerSecondTimeElapsed += deltaTime;
 
     framePerSecondCount++;
-    //FPSTimeElapsed ÀÌ 1ÃÊ°¡ ³Ñ¾úÀ»¶§
+    //FPSTimeElapsed ì´ 1ì´ˆê°€ ë„˜ì—ˆì„ë•Œ
     if (framePerSecondTimeElapsed > 1.0f)
     {
         framePerSecond = framePerSecondCount;

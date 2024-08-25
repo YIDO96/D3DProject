@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum class VertexType
 {
@@ -89,9 +89,9 @@ struct VertexModel
     Vector3 position;
     Vector2 uv;
     Vector3 normal;
-    //³ë¸Ö¸ÅÇÎ ÇÊ¿ä
+    //ë…¸ë©€ë§¤í•‘ í•„ìš”
     Vector3 tangent;
-    //½ºÅ°´× ÇÊ¿ä
+    //ìŠ¤í‚¤ë‹ í•„ìš”
     Vector4 indices;   // 0 , 1 , 3 , 5
     Vector4 weights;   //0.7 ,0.1,0.1,0.1
 };

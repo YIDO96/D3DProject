@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Water : public Actor
 {
     friend class GameObject;
@@ -13,7 +13,7 @@ private:
     ID3D11Buffer* waterBuffer;
     ID3D11Buffer* clipPlaneBuffer;
 
-    //¹İ»çµÉ »ó ±×·ÁÁÙ ·»´õÅ¸°Ù
+    //ë°˜ì‚¬ë  ìƒ ê·¸ë ¤ì¤„ ë Œë”íƒ€ê²Ÿ
     CubeRenderTarget* reflection;
     CubeRenderTarget* refraction;
 

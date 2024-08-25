@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Terrain* Terrain::Create(string name)
 {
@@ -47,7 +47,7 @@ Terrain::~Terrain()
 void Terrain::CreateStructuredBuffer()
 {
 	int triSize = (garo - 1) * (garo - 1) * 2;
-	//»ï°¢Çü ´ÜÀ§
+	//ì‚¼ê°í˜• ë‹¨ìœ„
 	inputArray = new InputDesc[triSize];
 	for (UINT i = 0; i < triSize; i++)
 	{
@@ -61,7 +61,7 @@ void Terrain::CreateStructuredBuffer()
 
 		inputArray[i].index = i;
 	}
-	//»ï°¢Çü ´ÜÀ§
+	//ì‚¼ê°í˜• ë‹¨ìœ„
 	outputArray = new OutputDesc[triSize];
 
 
@@ -159,7 +159,7 @@ void Terrain::CreateMesh(int   garo)
 	UINT vertexCount = garo * garo;
 	VertexType type = VertexType::TERRAIN;
 	VertexTerrain* vertices = new VertexTerrain[garo * garo];
-	//Á¤Á¡ °¹¼ö¸¸Å­ ¹İº¹¹®
+	//ì •ì  ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µë¬¸
 	float half = garo * 0.5f;
 
 	for (int i = 0; i < garo; i++)
@@ -176,11 +176,11 @@ void Terrain::CreateMesh(int   garo)
 	UINT indexCount = (garo - 1) * (garo - 1) * 6;
 	UINT* indices = new UINT[indexCount];
 
-	//»ç°¢Çü °¹¼ö¸¸Å­ ¹İº¹¹®
+	//ì‚¬ê°í˜• ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µë¬¸
 	int idxCount = 0;
-	for (int i = 0; i < (garo - 1); i++)      //¼¼·Î
+	for (int i = 0; i < (garo - 1); i++)      //ì„¸ë¡œ
 	{
-		for (int j = 0; j < (garo - 1); j++)  //°¡·Î
+		for (int j = 0; j < (garo - 1); j++)  //ê°€ë¡œ
 		{
 			int RectIdx = i * garo + j;
 
@@ -202,7 +202,7 @@ void Terrain::LoadHeightRaw(string file)
 {
 	file = "../Assets/" + file;
 	FILE* fp;
-	//ÆÄÀÏ ¿­±â
+	//íŒŒì¼ ì—´ê¸°
 	fopen_s(&fp, file.c_str(), "rb");
 	fseek(fp, 0, SEEK_END);
 	size = ftell(fp);
@@ -236,10 +236,10 @@ void Terrain::LoadHeightImage(string file)
 {
 	ScratchImage* img = Texture::GetPixelData(file);
 
-	//cout << "ÇÈ¼¿°¹¼ö:" << img->GetPixelsSize() << endl;
-	//cout << "Æ÷¸Ë:" << img->GetImages()[0].format << endl;
-	//cout << "°¡·ÎÅ©±â:" << img->GetImages()[0].width << endl;
-	//cout << "¼¼·ÎÅ©±â:" << img->GetImages()[0].height << endl;
+	//cout << "í”½ì…€ê°¯ìˆ˜:" << img->GetPixelsSize() << endl;
+	//cout << "í¬ë§·:" << img->GetImages()[0].format << endl;
+	//cout << "ê°€ë¡œí¬ê¸°:" << img->GetImages()[0].width << endl;
+	//cout << "ì„¸ë¡œí¬ê¸°:" << img->GetImages()[0].height << endl;
 	//cout << "rowPitch:" << img->GetImages()[0].rowPitch << endl;
 	//cout << "slicePitch:" << img->GetImages()[0].slicePitch << endl;
 
@@ -293,18 +293,18 @@ void Terrain::UpdateStructuredBuffer()
 
 void Terrain::UpdateNormal()
 {
-	for (int i = 0; i < (garo); i++)      //¼¼·Î
+	for (int i = 0; i < (garo); i++)      //ì„¸ë¡œ
 	{
-		for (int j = 0; j < (garo); j++)  //°¡·Î
+		for (int j = 0; j < (garo); j++)  //ê°€ë¡œ
 		{
 			VertexTerrain* vertices = (VertexTerrain*)mesh->vertices;
 			vertices[i * garo + j].normal = Vector3(0, 0, 0);
 		}
 	}
 	int idxCount = 0;
-	for (int i = 0; i < (garo - 1); i++)      //¼¼·Î
+	for (int i = 0; i < (garo - 1); i++)      //ì„¸ë¡œ
 	{
-		for (int j = 0; j < (garo - 1); j++)  //°¡·Î
+		for (int j = 0; j < (garo - 1); j++)  //ê°€ë¡œ
 		{
 			int RectIdx = i * garo + j;
 			UINT* indices = mesh->indices;
@@ -439,7 +439,7 @@ void Terrain::RenderDetail()
 
 
 				float half = garo * 0.5f;
-				//Á¤Á¡ °¹¼ö¸¸Å­ ¹İº¹¹®
+				//ì •ì  ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µë¬¸
 				for (int i = 0; i < garo; i++)
 				{
 					for (int j = 0; j < garo; j++)
@@ -453,11 +453,11 @@ void Terrain::RenderDetail()
 				UINT indexCount = (garo - 1) * (garo - 1) * 6;
 				UINT* indices = new UINT[indexCount];
 
-				//»ç°¢Çü °¹¼ö¸¸Å­ ¹İº¹¹®
+				//ì‚¬ê°í˜• ê°¯ìˆ˜ë§Œí¼ ë°˜ë³µë¬¸
 				int idxCount = 0;
-				for (int i = 0; i < (garo - 1); i++)      //¼¼·Î
+				for (int i = 0; i < (garo - 1); i++)      //ì„¸ë¡œ
 				{
-					for (int j = 0; j < (garo - 1); j++)  //°¡·Î
+					for (int j = 0; j < (garo - 1); j++)  //ê°€ë¡œ
 					{
 						int RectIdx = i * garo + j;
 
@@ -499,19 +499,19 @@ void Terrain::RenderDetail()
 bool Terrain::ComPutePicking(Ray WRay, OUT Vector3& HitPoint)
 {
 	int triSize = (garo - 1) * (garo - 1) * 2;
-	//½¦ÀÌ´õºÎÅÍ ÁØºñ
+	//ì‰ì´ë”ë¶€í„° ì¤€ë¹„
 	D3D->GetDC()->CSSetShader(computeShader, 0, 0);
 
 	//raybuffer binding
 	ray.position = WRay.position;
 	ray.direction = WRay.direction;
-	ray.size = (float)triSize;//»ï°¢Çü°¹¼ö
+	ray.size = (float)triSize;//ì‚¼ê°í˜•ê°¯ìˆ˜
 	Matrix inverse = W.Invert();
 	ray.direction = Vector3::TransformNormal(ray.direction, inverse);
 	ray.direction.Normalize();
 	ray.position = Vector3::Transform(ray.position, inverse);
 
-	//Æ®·£½ºÆûÇÑ Ray¸¦ »ó¼ö¹öÆÛ·Î ¹ÙÀÎµù
+	//íŠ¸ëœìŠ¤í¼í•œ Rayë¥¼ ìƒìˆ˜ë²„í¼ë¡œ ë°”ì¸ë”©
 	D3D->GetDC()->UpdateSubresource(rayBuffer, 0, NULL, &ray, 0, 0);
 
 	D3D->GetDC()->CSSetConstantBuffers(0, 1, &rayBuffer);
@@ -521,15 +521,15 @@ bool Terrain::ComPutePicking(Ray WRay, OUT Vector3& HitPoint)
 	//output binding
 	D3D->GetDC()->CSSetUnorderedAccessViews(0, 1, &uav, nullptr);
 
-	//¸ÖÆ¼½º·¹µù
-	//shader ½ÇÇà
-	//¿Ã¸²
+	//ë©€í‹°ìŠ¤ë ˆë”©
+	//shader ì‹¤í–‰
+	//ì˜¬ë¦¼
 	UINT x = (UINT)ceil((float)triSize / 1024.0f);
 	D3D->GetDC()->Dispatch(x, 1, 1);
 
-	//µ¿±âÈ­
+	//ë™ê¸°í™”
 
-	//gpu -> cpu º¹»ç
+	//gpu -> cpu ë³µì‚¬
 	D3D->GetDC()->CopyResource(result, output);
 
 	D3D11_MAPPED_SUBRESOURCE subResource;

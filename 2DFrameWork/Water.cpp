@@ -1,4 +1,4 @@
-#include "framework.h"
+Ôªø#include "framework.h"
 
 Water* Water::Create(string name)
 {
@@ -17,7 +17,7 @@ Water::Water()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(WaterBuffer);
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ªÛºˆπˆ∆€
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ÏÉÅÏàòÎ≤ÑÌçº
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;
@@ -29,7 +29,7 @@ Water::Water()
         D3D11_BUFFER_DESC desc = { 0 };
         desc.ByteWidth = sizeof(Vector4);
         desc.Usage = D3D11_USAGE_DYNAMIC;
-        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ªÛºˆπˆ∆€
+        desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;//ÏÉÅÏàòÎ≤ÑÌçº
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         desc.MiscFlags = 0;
         desc.StructureByteStride = 0;
@@ -48,7 +48,7 @@ void Water::Render(shared_ptr<Shader> pShader)
 {
     {
         waterBufferDesc.time = TIMER->GetWorldTime();
-        //ªÛºˆπˆ∆€
+        //ÏÉÅÏàòÎ≤ÑÌçº
         D3D11_MAPPED_SUBRESOURCE mappedResource;
         D3D->GetDC()->Map(waterBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         memcpy_s(mappedResource.pData, sizeof(WaterBuffer), &waterBufferDesc, sizeof(WaterBuffer));
@@ -100,7 +100,7 @@ void Water::SetReflectionTarget()
 
     Plane pl(GetWorldPos(), GetUp());
     {
-        //ªÛºˆπˆ∆€
+        //ÏÉÅÏàòÎ≤ÑÌçº
         D3D11_MAPPED_SUBRESOURCE mappedResource;
         D3D->GetDC()->Map(clipPlaneBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         memcpy_s(mappedResource.pData, sizeof(Vector4), &pl, sizeof(Vector4));
@@ -117,7 +117,7 @@ void Water::SetRefractionTarget()
     refraction->SetTarget();
 
     {
-        //ªÛºˆπˆ∆€
+        //ÏÉÅÏàòÎ≤ÑÌçº
         D3D11_MAPPED_SUBRESOURCE mappedResource;
         D3D->GetDC()->Map(clipPlaneBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
         memcpy_s(mappedResource.pData, sizeof(Vector4), &pl, sizeof(Vector4));

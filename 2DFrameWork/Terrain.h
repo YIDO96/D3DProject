@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Terrain : public Actor
 {
     struct InputDesc
@@ -31,12 +31,12 @@ private:
     //compute Input
     InputDesc* inputArray;
     ID3D11Resource* input;
-    ID3D11ShaderResourceView* srv = nullptr;//ÀĞ±âÀü¿ë
+    ID3D11ShaderResourceView* srv = nullptr;//ì½ê¸°ì „ìš©
     //compute Output
     OutputDesc* outputArray;
     ID3D11Resource* output;
-    ID3D11UnorderedAccessView* uav;//ÀĞ±â¾²±â µÑ´Ù°¡´É
-    //copy¿ë
+    ID3D11UnorderedAccessView* uav;//ì½ê¸°ì“°ê¸° ë‘˜ë‹¤ê°€ëŠ¥
+    //copyìš©
     ID3D11Resource* result;
     //ray
     RayDesc                     ray;
@@ -45,7 +45,7 @@ public:
 	int				size;
 	float			uvScale;
 	int				garo;
-    //CS            ÄÄÇ»Æ® ½¦ÀÌ´õ·Î ÇÇÅ·ÇÒ¶§¸¸ ¸¸µé±â
+    //CS            ì»´í“¨íŠ¸ ì‰ì´ë”ë¡œ í”¼í‚¹í• ë•Œë§Œ ë§Œë“¤ê¸°
     void            CreateStructuredBuffer();
     void            DeleteStructuredBuffer();
 

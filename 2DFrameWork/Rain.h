@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 
 class Particle : public Actor
 {
 protected:
 
-    //ÇöÀç Àç»ıÁßÀÎ ½Ã°£
+    //í˜„ì¬ ì¬ìƒì¤‘ì¸ ì‹œê°„
     float playTime = 0.0f;
-    //Àç»ıÁßÀÎ°¡?
+    //ì¬ìƒì¤‘ì¸ê°€?
     bool isPlaying = false;
 public:
-    //ÃÑ Àç»ı½Ã°£
+    //ì´ ì¬ìƒì‹œê°„
     float duration = 10.0f;
     virtual void    Play()
     {
@@ -22,11 +22,11 @@ public:
     };
     void            UpdateParticle();
     void            Gui();
-    float           PlayTime() { return playTime / duration; } //Àç»ı½Ã°£ ºñÀ²
-    bool            IsPlaying() { return isPlaying; } //Àç»ıÁßÀÎ°¡?
+    float           PlayTime() { return playTime / duration; } //ì¬ìƒì‹œê°„ ë¹„ìœ¨
+    bool            IsPlaying() { return isPlaying; } //ì¬ìƒì¤‘ì¸ê°€?
 };
 
-//»ó¼ö¹öÆÛ
+//ìƒìˆ˜ë²„í¼
 struct RAIN_DESC
 {
     Vector3 velocity;
@@ -48,7 +48,7 @@ public:
     //virtual ~Rain();
 
     RAIN_DESC desc;
-    Vector2             particleScale = Vector2(0, 0); //ÀÌ¹ÌÁö Å©±â°ª
+    Vector2             particleScale = Vector2(0, 0); //ì´ë¯¸ì§€ í¬ê¸°ê°’
     int                 particleCount = 100;
 
     static void         CreateStaticMember();

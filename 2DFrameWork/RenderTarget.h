@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class RenderTarget
 {
     friend class Deferred;
@@ -9,17 +9,17 @@ protected:
     ID3D11Texture2D* rgb;    //rgb
     ID3D11Texture2D* depth;  //depth
 
-    //ÆÄÀÌÇÁ¶óÀÎ °áÇÕÇÒ¶§ Å¸°ÙÀ¸·Î ¾µ ÀÎÅÍÆäÀÌ½º
+    //íŒŒì´í”„ë¼ì¸ ê²°í•©í• ë•Œ íƒ€ê²Ÿìœ¼ë¡œ ì“¸ ì¸í„°í˜ì´ìŠ¤
     ID3D11RenderTargetView* rgbTarget;
     ID3D11DepthStencilView* depthTarget;
 
-    //ÆÄÀÌÇÁ¶óÀÎ °áÇÕÇÒ¶§ ÅØ½ºÃÄ·Î ¾µ ÀÎÅÍÆäÀÌ½º
+    //íŒŒì´í”„ë¼ì¸ ê²°í•©í• ë•Œ í…ìŠ¤ì³ë¡œ ì“¸ ì¸í„°í˜ì´ìŠ¤
     ID3D11ShaderResourceView* rgbResource;
     ID3D11ShaderResourceView* depthResource;
 
     ID3D11SamplerState* sampler;
 
-    //Ã¢»çÀÌÁî Á¶Àı
+    //ì°½ì‚¬ì´ì¦ˆ ì¡°ì ˆ
     void CreateBackBuffer(float width, float height, bool stencil = false);
     void DeleteBackBuffer();
 
@@ -33,7 +33,7 @@ public:
     void SetRGBTexture(int slot);
 
   
-    //Ã¢»çÀÌÁî Á¶Àı
+    //ì°½ì‚¬ì´ì¦ˆ ì¡°ì ˆ
     void ResizeScreen(float width, float height);
 };
 

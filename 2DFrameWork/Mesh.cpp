@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 shared_ptr<Mesh> Mesh::CreateMesh()
 {
@@ -8,9 +8,9 @@ shared_ptr<Mesh> Mesh::CreateMesh()
     temp->byteWidth = sizeof(VertexBillboard);
 
 
-    //Á¤Á¡ °¹¼ö
+    //ì •ì  ê°¯ìˆ˜
     temp->vertexCount = 1;
-    //ÀÎµ¦½º °¹¼ö
+    //ì¸ë±ìŠ¤ ê°¯ìˆ˜
     temp->indexCount = 1;
 
     VertexBillboard* Vertex = new VertexBillboard[temp->vertexCount];
@@ -191,7 +191,7 @@ void Mesh::LoadFile(string file)
     BinaryReader in;
     wstring path = L"../Contents/Mesh/" + Utility::ToWString(file);
     in.Open(path);
-    //ÀÐ±âÀü
+    //ì½ê¸°ì „
     switch (vertexType)
     {
     case VertexType::P:
@@ -232,7 +232,7 @@ void Mesh::LoadFile(string file)
     indices = new UINT[indexCount];
 
 
-    //ÀÐ°í³­ÈÄ
+    //ì½ê³ ë‚œí›„
     switch (vertexType)
     {
     case VertexType::P:
@@ -653,7 +653,7 @@ void Mesh::SaveInstanceFile(string file)
 
 void Mesh::InstanceEdit()
 {
-    //³» ÀÎ½ºÅÏ½º °¹¼ö
+    //ë‚´ ì¸ìŠ¤í„´ìŠ¤ ê°¯ìˆ˜
     string instanceCount = to_string(this->instanceCount);
     ImGui::Text(instanceCount.c_str());
 
@@ -688,7 +688,7 @@ void Mesh::InstanceEdit()
         }
 
 
-        //ÁÂÇ¥
+        //ì¢Œí‘œ
         //ImGui::Text("X: %f Y: %f Z: %f", instance[i]._14, instance[i]._24, instance[i]._34);
        
 
@@ -702,7 +702,7 @@ void Mesh::InstanceEdit()
     if (ImGui::Button("+"))
     {
         Matrix* Instance = new Matrix[this->instanceCount + 1];
-        //º¹»ç
+        //ë³µì‚¬
         memcpy(Instance, instance, sizeof(Matrix) * this->instanceCount);
 
         CreateInstanceBuffer(Instance, this->instanceCount + 1);
@@ -714,7 +714,7 @@ void Mesh::InstanceEdit()
         if (this->instanceCount > 1)
         {
             Matrix* Instance = new Matrix[this->instanceCount - 1];
-            //º¹»ç
+            //ë³µì‚¬
             memcpy(Instance, instance, sizeof(Matrix) * (this->instanceCount - 1));
 
             CreateInstanceBuffer(Instance, this->instanceCount - 1);

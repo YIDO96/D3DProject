@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 struct POP_DESC
 {
-    float duration;		//	ÃÑ Àç»ı½Ã°£
-    float time;			//  ÇöÀç Àç»ıÁßÀÎ½Ã°£
-    float gravity;		//  Áß·Â°ª
+    float duration;		//	ì´ ì¬ìƒì‹œê°„
+    float time;			//  í˜„ì¬ ì¬ìƒì¤‘ì¸ì‹œê°„
+    float gravity;		//  ì¤‘ë ¥ê°’
     float padding;
     POP_DESC()
     {
@@ -17,7 +17,7 @@ class Pop :  public Particle
     static ID3D11Buffer* PopBuffer;
 public:
     POP_DESC			desc;
-    Vector2             particleScale = Vector2(0, 0); //ÀÌ¹ÌÁö Å©±â°ª
+    Vector2             particleScale = Vector2(0, 0); //ì´ë¯¸ì§€ í¬ê¸°ê°’
     int                 particleCount = 100;
     float               velocityScalar = 10.0f;
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Camera : public Actor
 {
 
@@ -28,5 +28,5 @@ public:
     void            ResizeScreen();
     void	        RenderDetail();
     bool            Intersect(Vector3 coord);
-    bool            Intersect(Collider* target); //ÄÃ¶óÀÌ´õ
+    bool            Intersect(Collider* target); //ì»¬ë¼ì´ë”
 };

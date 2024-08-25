@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 Animation::Animation()
 {
@@ -133,7 +133,7 @@ void Animations::Update()
 		if (Changedtime > blendtime)
 		{
 			Changedtime = 0.0f;
-			//´ÙÀ½¾Ö´Ï¸ŞÀÌ¼ÇÀ» ÇöÀç¾Ö´Ï¸ŞÀÌ¼ÇÀ¸·Î ¹Ù²Û´Ù.
+			//ë‹¤ìŒì• ë‹ˆë©”ì´ì…˜ì„ í˜„ì¬ì• ë‹ˆë©”ì´ì…˜ìœ¼ë¡œ ë°”ê¾¼ë‹¤.
 			currentAnimator = nextAnimator;
 			isChanging = false;
 		}

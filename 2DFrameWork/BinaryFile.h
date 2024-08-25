@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class BinaryWriter
 {
@@ -42,7 +42,7 @@ public:
 	bool Open(wstring filePath);
 	void Close();
 
-	//µ¥ÀÌÅÍ¸¦ ¿øÇÏ´Â Å¸ÀÔÀ¸·Î ¹İÈ¯
+	//ë°ì´í„°ë¥¼ ì›í•˜ëŠ” íƒ€ì…ìœ¼ë¡œ ë°˜í™˜
 	bool Bool();
 	unsigned char Byte();
 	WORD Word();

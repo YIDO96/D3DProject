@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class SceneManager :public Singleton<SceneManager>
 {
 private:
@@ -12,15 +12,15 @@ private:
 public:
     ~SceneManager();
 
-    //¾À Ãß°¡
+    //ì”¬ ì¶”ê°€
     bool    AddScene(string key, Scene * value);
-    //¾À »èÁ¦
+    //ì”¬ ì‚­ì œ
     bool    DeleteScene(string key);
-    //¾À º¯°æ
+    //ì”¬ ë³€ê²½
     Scene * ChangeScene(string key, float changingTime = 0.0f);
-    //¾À °¡Á®¿À±â
+    //ì”¬ ê°€ì ¸ì˜¤ê¸°
     Scene * GetScene(string key);
-    //ÇöÀç ¾À °¡Á®¿À±â
+    //í˜„ìž¬ ì”¬ ê°€ì ¸ì˜¤ê¸°
     Scene * GetCurrentScene();
 
     void    Release();

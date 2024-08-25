@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
 
 class Direct3D11 : public Singleton<Direct3D11>
 {
 private:
 
-	// ÀÎÅÍÆäÀÌ½º
-	//new ·Î »ı¼ººÒ°¡ (Ãß»óÅ¬·¡½º)
-	//CreateÇÔ¼ö·Î »ı¼ºµÈ ÁÖ¼Ò¸¦ ¹Ş¾Æ¿Â´Ù
-	ID3D11Device* device;			//¹öÆÛ»ı¼º
-	ID3D11DeviceContext* deviceContext;	//·»´õ¸µÆÄÀÌÇÁ¶óÀÎ ¹ÙÀÎµù,µå·Î¿ìÄİ
-	IDXGISwapChain* swapChain;		//¹é¹öÆÛ(´õºí¹öÆÛ¸µ,¼öÁ÷µ¿±âÈ­)
+	// ì¸í„°í˜ì´ìŠ¤
+	//new ë¡œ ìƒì„±ë¶ˆê°€ (ì¶”ìƒí´ë˜ìŠ¤)
+	//Createí•¨ìˆ˜ë¡œ ìƒì„±ëœ ì£¼ì†Œë¥¼ ë°›ì•„ì˜¨ë‹¤
+	ID3D11Device* device;			//ë²„í¼ìƒì„±
+	ID3D11DeviceContext* deviceContext;	//ë Œë”ë§íŒŒì´í”„ë¼ì¸ ë°”ì¸ë”©,ë“œë¡œìš°ì½œ
+	IDXGISwapChain* swapChain;		//ë°±ë²„í¼(ë”ë¸”ë²„í¼ë§,ìˆ˜ì§ë™ê¸°í™”)
 	ID3D11Texture2D* backBuffer;
 	ID3D11RenderTargetView* renderTargetView;
 	ID3D11DepthStencilView* depthStencilView;

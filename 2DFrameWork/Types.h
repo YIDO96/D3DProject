@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 class Application
@@ -40,7 +40,7 @@ public:
 		if (this->appName == L" ")
 			this->appName = appName;
 	}
-	//ÇØ»óµµº¯°æÀº D3DÀÇ ¸®»çÀÌÁî ÇÔ¼ö ÀÌ¿ë!
+	//í•´ìƒë„ë³€ê²½ì€ D3Dì˜ ë¦¬ì‚¬ì´ì¦ˆ í•¨ìˆ˜ ì´ìš©!
 };
 
 template <typename T>
@@ -69,16 +69,16 @@ public:
 template <typename T>
 T* Singleton<T>::instance = nullptr;
 
-//¾ÀÅ¸ÀÔÀ¸·Î´Â °´Ã¼¸¦¸¸µé¼ö ¾ø´Ù.
+//ì”¬íƒ€ì…ìœ¼ë¡œëŠ” ê°ì²´ë¥¼ë§Œë“¤ìˆ˜ ì—†ë‹¤.
 
 
 class Scene
 {
 public:
 	virtual ~Scene() {};
-	//ÃÊ±âÈ­
+	//ì´ˆê¸°í™”
 	virtual void Init() = 0;
-	//ÇØÁ¦
+	//í•´ì œ
 	virtual void Release() = 0;
 	//Loop
 	virtual void Update() = 0;

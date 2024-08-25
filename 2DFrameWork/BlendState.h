@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 class BlendState :public Singleton<BlendState>
 {
-	ID3D11BlendState* Enable; //¾ËÆÄ ºí·»µù
-	ID3D11BlendState* Unable; //¾ËÆÄ Å×½ºÆ®
+	ID3D11BlendState* Enable; //ì•ŒíŒŒ ë¸”ë Œë”©
+	ID3D11BlendState* Unable; //ì•ŒíŒŒ í…ŒìŠ¤íŠ¸
 public:
 	BlendState();
 	~BlendState();

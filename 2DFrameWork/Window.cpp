@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 
 Application	 App;
 Scene* Window::main = nullptr;

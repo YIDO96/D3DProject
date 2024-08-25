@@ -8,15 +8,15 @@ private:
 
     Terrain* terrain;
     Actor*      vam;
-    Deferred*   deferred;   //4°³ÀÇ ·»´õÅ¸°Ù  
-    UI*      post;       //4°³ÀÇ ·»´õÅ¸°ÙÀ» ¹Ş¾Æ ±×·ÁÁÙ
+    Deferred*   deferred;   //4ê°œì˜ ë Œë”íƒ€ê²Ÿ  
+    UI*      post;       //4ê°œì˜ ë Œë”íƒ€ê²Ÿì„ ë°›ì•„ ê·¸ë ¤ì¤„
     Actor* test;
 
 public:
     Scene1();
     ~Scene1();
 
-    // SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
     virtual void Init() override;
     virtual void Release() override;
     virtual void Update() override;

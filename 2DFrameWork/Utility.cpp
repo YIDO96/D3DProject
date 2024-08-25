@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 void Utility::Replace(string* str, string comp, string rep)
 {
     string temp = *str;
@@ -49,11 +49,11 @@ Ray Utility::MouseToRay(Camera* Cam)
 
 	Vector2 MousePos;
 
-	//ndc·ÎÀÇ º¯È¯
+	//ndcë¡œì˜ ë³€í™˜
 	MousePos.x = ((2.0f * Mouse.x) / Cam->viewport.width - 1.0f);
 	MousePos.y = ((-2.0f * Mouse.y) / Cam->viewport.height + 1.0f);
 
-	// view·ÎÀÇ º¯È¯
+	// viewë¡œì˜ ë³€í™˜
 	MousePos.x /= Cam->proj._11;
 	MousePos.y /= Cam->proj._22;
 
@@ -75,7 +75,7 @@ Vector3 Utility::MouseToNDC(Camera* Cam)
 
 	Vector3 MousePos;
 
-	//ndc·ÎÀÇ º¯È¯
+	//ndcë¡œì˜ ë³€í™˜
 	MousePos.x = ((2.0f * Mouse.x) / Cam->viewport.width - 1.0f);
 	MousePos.y = ((-2.0f * Mouse.y) / Cam->viewport.height + 1.0f);
 	MousePos.z = 0.0f;
@@ -157,9 +157,9 @@ bool Utility::RayIntersectTri(IN Ray WRay, IN GameObject* Target, OUT Vector3& H
 		float Dis;
 		if (WRay.Intersects(v[0], v[1], v[2], Dis))
 		{
-			//                         ½ºÄ®¶ó x ¹æÇâ
+			//                         ìŠ¤ì¹¼ë¼ x ë°©í–¥
 			HitPoint = WRay.position + (WRay.direction * Dis);
-			//´Ù½Ã W ·Î º¯È¯
+			//ë‹¤ì‹œ W ë¡œ ë³€í™˜
 			HitPoint = Vector3::Transform(HitPoint, Target->W);
 			return true;
 		}
@@ -170,7 +170,7 @@ bool Utility::RayIntersectTri(IN Ray WRay, IN GameObject* Target, OUT Vector3& H
 bool Utility::RayIntersectMap(IN Ray WRay, IN GameObject* Terrain, OUT Vector3& HitPoint)
 {
 	if (not Terrain->mesh)return false;
-	//¿ªÇà·Ä ±¸ÇÏ±â
+	//ì—­í–‰ë ¬ êµ¬í•˜ê¸°
 	Matrix inverse = Terrain->W.Invert();
 
 	//w=0
@@ -179,7 +179,7 @@ bool Utility::RayIntersectMap(IN Ray WRay, IN GameObject* Terrain, OUT Vector3& 
 	//w=1
 	WRay.position = Vector3::Transform(WRay.position, inverse);
 
-	//Terrain Áß½ÉÁ¡ 0,0,0ÀÌ °¡¿îµ¥°¡ ¾Æ´Ñ ¿ÞÂÊ»ó´ÜÀÌ 0,0,0ÀÌ µÇ°Ô²û ÀÌµ¿
+	//Terrain ì¤‘ì‹¬ì  0,0,0ì´ ê°€ìš´ë°ê°€ ì•„ë‹Œ ì™¼ìª½ìƒë‹¨ì´ 0,0,0ì´ ë˜ê²Œë” ì´ë™
 
 	int terrainSize = (int)sqrt(Terrain->mesh->vertexCount);
 	float half = terrainSize * 0.5f;
@@ -193,9 +193,9 @@ bool Utility::RayIntersectMap(IN Ray WRay, IN GameObject* Terrain, OUT Vector3& 
 		//cout << "OutofRange" << endl;
 		return false;
 	}
-	//»ç°¢Çü ÀÎµ¦½º
+	//ì‚¬ê°í˜• ì¸ë±ìŠ¤
 	int index = (terrainSize - 1) * TerrainIdxZ + TerrainIdxX;
-	//»ç°¢ÇüÀÇ Ã¹¹øÂ° Á¤Á¡ ÀÎµ¦½º
+	//ì‚¬ê°í˜•ì˜ ì²«ë²ˆì§¸ ì •ì  ì¸ë±ìŠ¤
 	index *= 6;
 
 	for (int i = 0; i < 6; i += 3)
@@ -208,9 +208,9 @@ bool Utility::RayIntersectMap(IN Ray WRay, IN GameObject* Terrain, OUT Vector3& 
 		float Dis;
 		if (WRay.Intersects(v[0], v[1], v[2], Dis))
 		{
-			//                         ½ºÄ®¶ó x ¹æÇâ
+			//                         ìŠ¤ì¹¼ë¼ x ë°©í–¥
 			HitPoint = WRay.position + Dis * WRay.direction;
-			//´Ù½Ã W ·Î º¯È¯
+			//ë‹¤ì‹œ W ë¡œ ë³€í™˜
 			HitPoint = Vector3::Transform(HitPoint, Terrain->W);
 			return true;
 		}
@@ -222,7 +222,7 @@ bool Utility::RayIntersectLocalMap(IN Ray WRay, IN GameObject* Terrain, OUT Vect
 {
 	if (not Terrain->mesh)return false;
 
-	//Terrain Áß½ÉÁ¡ 0,0,0ÀÌ °¡¿îµ¥°¡ ¾Æ´Ñ ¿ÞÂÊ»ó´ÜÀÌ 0,0,0ÀÌ µÇ°Ô²û ÀÌµ¿
+	//Terrain ì¤‘ì‹¬ì  0,0,0ì´ ê°€ìš´ë°ê°€ ì•„ë‹Œ ì™¼ìª½ìƒë‹¨ì´ 0,0,0ì´ ë˜ê²Œë” ì´ë™
 
 	int terrainSize = (int)sqrt(Terrain->mesh->vertexCount);
 	float half = terrainSize * 0.5f;
@@ -236,9 +236,9 @@ bool Utility::RayIntersectLocalMap(IN Ray WRay, IN GameObject* Terrain, OUT Vect
 		//cout << "OutofRange" << endl;
 		return false;
 	}
-	//»ç°¢Çü ÀÎµ¦½º
+	//ì‚¬ê°í˜• ì¸ë±ìŠ¤
 	int index = (terrainSize - 1) * TerrainIdxZ + TerrainIdxX;
-	//»ç°¢ÇüÀÇ Ã¹¹øÂ° Á¤Á¡ ÀÎµ¦½º
+	//ì‚¬ê°í˜•ì˜ ì²«ë²ˆì§¸ ì •ì  ì¸ë±ìŠ¤
 	index *= 6;
 
 	for (int i = 0; i < 6; i += 3)
@@ -251,9 +251,9 @@ bool Utility::RayIntersectLocalMap(IN Ray WRay, IN GameObject* Terrain, OUT Vect
 		float Dis;
 		if (WRay.Intersects(v[0], v[1], v[2], Dis))
 		{
-			//                         ½ºÄ®¶ó x ¹æÇâ
+			//                         ìŠ¤ì¹¼ë¼ x ë°©í–¥
 			HitPoint = WRay.position + Dis * WRay.direction;
-			//´Ù½Ã W ·Î º¯È¯
+			//ë‹¤ì‹œ W ë¡œ ë³€í™˜
 			HitPoint = Vector3::Transform(HitPoint, Terrain->W);
 			return true;
 		}

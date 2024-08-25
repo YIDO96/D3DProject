@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 
 GameObject* GameObject::Create(string name)
 {
@@ -143,10 +143,10 @@ void GameObject::AddBone(GameObject* child)
 
 void GameObject::Update()
 {
-	//³»°¡ À§¿¡ ½ºÄÌ·¹ÅæÀÌ ÀÖÀ»¶§
+	//ë‚´ê°€ ìœ„ì— ìŠ¤ì¼ˆë ˆí†¤ì´ ìžˆì„ë•Œ
 	if (skelRoot and boneIndex != -1)
 	{
-		//¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ÀÖÀ»‹š
+		//ì• ë‹ˆë©”ì´ì…˜ì´ ìžˆì„ë–„
 		if (skelRoot->anim)
 		{
 			if (rootMotion)
@@ -168,9 +168,9 @@ void GameObject::Update()
 		{
 			Transform::Update();
 		}
-		//                      W¿ªÇà·Ä *  W 
+		//                      Wì—­í–‰ë ¬ *  W 
 		Matrix temp = skelRoot->skeleton->bonesOffset[boneIndex] * W;
-		//Çà¿ì¼±->¿­¿ì¼±
+		//í–‰ìš°ì„ ->ì—´ìš°ì„ 
 		skelRoot->skeleton->bones[boneIndex] = temp.Transpose();
 	}
 	else
@@ -251,7 +251,7 @@ Actor* Actor::Create(string name)
 
 Actor* Actor::Create(Actor* src)
 {
-	//·çÆ®¸¸ º¹»ç
+	//ë£¨íŠ¸ë§Œ ë³µì‚¬
 	Actor* temp = new Actor(*src);
 	temp->CopyChild(src);
 	return temp;
@@ -271,7 +271,7 @@ Actor::~Actor()
 }
 
 
-//ÇÏÀ§³ëµå »èÁ¦
+//í•˜ìœ„ë…¸ë“œ ì‚­ì œ
 void Actor::ReleaseMember()
 {
 	for (auto it = children.begin(); it != children.end(); it++)
@@ -285,7 +285,7 @@ void Actor::ReleaseMember()
 GameObject* Actor::Find(string name)
 {
 	auto it = obList.find(name);
-	//Ã£¾Ò´Ù
+	//ì°¾ì•˜ë‹¤
 	if (it != obList.end())
 	{
 		return it->second;
@@ -301,10 +301,10 @@ bool Actor::DeleteObject(string Name)
 
 	if (temp == obList.end())  return false;
 
-	//Áö¿öÁú´ë»ó,Áö¿öÁú´ë»óÀÇ ºÎ¸ð Æ÷ÀÎÅÍ
+	//ì§€ì›Œì§ˆëŒ€ìƒ,ì§€ì›Œì§ˆëŒ€ìƒì˜ ë¶€ëª¨ í¬ì¸í„°
 	GameObject* Target = temp->second;
 	GameObject* Parent = temp->second->parent;
-	//ºÎ¸ð¸®½ºÆ®¿¡¼­ Å¸°Ù ºñ¿ì±â
+	//ë¶€ëª¨ë¦¬ìŠ¤íŠ¸ì—ì„œ íƒ€ê²Ÿ ë¹„ìš°ê¸°
 	Parent->children.erase(Parent->children.find(Name));
 
 	for (auto it = Target->children.begin();
@@ -321,18 +321,18 @@ bool Actor::DeleteObject(string Name)
 
 bool Actor::DeleteAllObject(string Name)
 {
-	//·çÆ®»èÁ¦ ¹æÁö
+	//ë£¨íŠ¸ì‚­ì œ ë°©ì§€
 	if (Name == name) return false;
 
-	//¸®½ºÆ®¿¡¼­ Ã£±â
+	//ë¦¬ìŠ¤íŠ¸ì—ì„œ ì°¾ê¸°
 	auto temp = obList.find(Name);
-	//¾øÀ¸¸é µÇµ¹¾Æ±â
+	//ì—†ìœ¼ë©´ ë˜ëŒì•„ê¸°
 	if (temp == obList.end())  return false;
 
-	//Áö¿öÁú´ë»ó,Áö¿öÁú´ë»óÀÇ ºÎ¸ð Æ÷ÀÎÅÍ
+	//ì§€ì›Œì§ˆëŒ€ìƒ,ì§€ì›Œì§ˆëŒ€ìƒì˜ ë¶€ëª¨ í¬ì¸í„°
 	GameObject* Target = temp->second;
 	GameObject* Parent = temp->second->parent;
-	//ºÎ¸ð¸®½ºÆ®¿¡¼­ Å¸°Ù ºñ¿ì±â
+	//ë¶€ëª¨ë¦¬ìŠ¤íŠ¸ì—ì„œ íƒ€ê²Ÿ ë¹„ìš°ê¸°
 	Parent->children.erase(Parent->children.find(Name));
 	root->obList.erase(root->obList.find(Name));
 

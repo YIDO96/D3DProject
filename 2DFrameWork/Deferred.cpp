@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 
 Deferred::Deferred(UINT width, UINT height)
 {

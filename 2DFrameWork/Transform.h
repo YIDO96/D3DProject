@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Transform
 {
 
@@ -32,7 +32,7 @@ public:
     Vector3 GetUp() { return Vector3(RT._21, RT._22, RT._23); }
     Vector3 GetForward() { return Vector3(RT._31, RT._32, RT._33); }
 
-    //¿ùµå °ø°£ ÁÂÇ¥
+    //ì›”ë“œ ê³µê°„ ì¢Œí‘œ
     // Read
     Vector3     GetWorldPos();
     // = Write
@@ -43,7 +43,7 @@ public:
     // +=
     void        MoveWorldPos(const Vector3& WScaleVec);
 
-    //¿ùµå ½ºÄÉÀÏ ·ÎÄÃ ÁÂÇ¥
+    //ì›”ë“œ ìŠ¤ì¼€ì¼ ë¡œì»¬ ì¢Œí‘œ
     Vector3     GetLocalPos();
     void        SetLocalPos(Vector3 WPos);
     void        SetLocalPosX(float WPosX);

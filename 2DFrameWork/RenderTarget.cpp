@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 
 void RenderTarget::CreateBackBuffer(float width, float height, bool stencil)
 {

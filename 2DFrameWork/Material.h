@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class MaterialBuffer
 {
@@ -8,8 +8,8 @@ public:
 	Color	specular;
 	Color	emissive;
 
-	float	shininess;		//½ºÆåÅ§·¯ ¹ĞÁıµµ
-	float	opacity;		//Åõ¸íµµ
+	float	shininess;		//ìŠ¤í™í˜ëŸ¬ ë°€ì§‘ë„
+	float	opacity;		//íˆ¬ëª…ë„
 	float   roughness;
 	float	metallic;
 
